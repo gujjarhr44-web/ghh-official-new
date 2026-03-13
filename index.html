@@ -1,1 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GHH@OFFICIAL - Ultimate OS Pro v26.0 Mobile Optimized</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
 
+        :root {
+            --primary-accent: #3b82f6;
+            --glass-blur: 25px;
+            --card-radius: 30px;
+            --anim-curve: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --anim-speed: 0.6s;
+            --neon-color: rgba(59, 130, 246, 0.6);
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --text-color: #1a1a1a;
+            --bg-solid: #ffffff;
+        }
+
+        /* --- OS THEME DEFINITIONS --- */
+        body.os-ios { --primary-accent: #007aff; --card-radius: 46px; --glass-blur: 50px; --neon-color: rgba(0, 122, 255, 0.7); }
+        body.os-origin { --primary-accent: #6366f1; --card-radius: 34px; --glass-blur: 65px; --neon-color: rgba(99, 102, 241, 0.7); }
+        body.os-samsung { --primary-accent: #0341f1; --card-radius: 42px; --glass-blur: 20px; --neon-color: rgba(3, 65, 241, 0.7); }
+        body.os-gaming { 
+            --primary-accent: #ff003c; --card-radius: 4px; --glass-blur: 15px; 
+            --neon-color: rgba(255, 0, 60, 0.9); --glass-bg: rgba(15, 15, 15, 0.85);
+            --bg-solid: #050505; --text-color: #ffffff;
+        }
+        body.os-nothing { 
+            --primary-accent: #ffffff; --card-radius: 24px; --glass-blur: 30px; 
+            --neon-color: rgba(150, 150, 150, 0.5); --glass-bg: rgba(255, 255, 255, 0.1);
+            --bg-solid: #000000; --text-color: #ffffff;
+        }
+        body.os-miui { --primary-accent: #ff6700; --card-radius: 28px; --glass-blur: 25px; --neon-color: rgba(255, 103, 0, 0.7); }
+
+        body.dark-mode { --glass-bg: rgba(20, 20, 20, 0.65); --text-color: #ffffff; --bg-solid: #0a0a0a; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0; background: var(--bg-solid); color: var(--text-color);
+            transition: background 0.8s ease, color 0.5s ease;
+            overflow: hidden; height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Crystal Background */
+        .liquid-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+        .blob { position: absolute; width: 700px; height: 700px; background: var(--neon-color); filter: blur(160px); border-radius: 50%; opacity: 0.2; animation: moveBlobs 20s infinite alternate ease-in-out; }
+        @keyframes moveBlobs { 0% { transform: translate(-10%, -10%) scale(1); } 100% { transform: translate(15%, 15%) scale(1.15); } }
+
+        /* Premium Glass Component */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+            border: 1.5px solid rgba(255, 255, 255, 0.4); 
+            border-radius: var(--card-radius);
+            box-shadow: 
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+                0 0 15px var(--neon-color),
+                0 8px 32px rgba(0,0,0,0.08);
+            transition: all var(--anim-speed) var(--anim-curve);
+        }
+
+        /* --- OS SPECIFIC ANIMATIONS --- */
+        .anim-os { will-change: transform, opacity, filter; opacity: 0; }
+        .anim-os.active { opacity: 1; }
+
+        .os-origin .anim-os.active { animation: originFocus 0.8s var(--anim-curve) forwards; }
+        @keyframes originFocus { 
+            0% { filter: blur(60px); opacity: 0; transform: scale(1.1); } 
+            100% { filter: blur(0px); opacity: 1; transform: scale(1); } 
+        }
+
+        .os-ios .anim-os.active { animation: iosSpring 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        @keyframes iosSpring { 0% { transform: scale(0.85); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        .os-gaming .anim-os.active { animation: gamingGlitch 0.4s steps(3) forwards; }
+        @keyframes gamingGlitch { 0% { transform: translate(10px); opacity: 0; filter: hue-rotate(90deg); } 50% { transform: translate(-10px); opacity: 0.5; } 100% { transform: translate(0); opacity: 1; filter: hue-rotate(0); } }
+
+        /* --- CONTROLS --- */
+        .os-hub-btn { position: fixed; top: 60px; right: 16px; width: 48px; height: 48px; background: var(--primary-accent); border-radius: 50%; display: flex; items-center: center; justify-content: center; z-index: 5000; box-shadow: 0 0 20px var(--neon-color); cursor: pointer; color: white; transition: 0.3s; border: 1.5px solid rgba(255, 255, 255, 0.3); }
+        .os-hub-btn:hover { transform: scale(1.1) rotate(15deg); }
+        
+        .top-left-controls { position: fixed; top: 60px; left: 16px; z-index: 5000; display: flex; gap: 8px; }
+        .customize-btn { cursor: pointer; border: 1.5px solid rgba(255, 255, 255, 0.4); padding: 8px 14px; font-size: 9px; font-weight: 900; text-transform: uppercase; border-radius: 12px; }
+        
+        /* Fixed Bottom Position for Theme Toggle */
+        .theme-toggle-btn { position: fixed; bottom: 24px; left: 16px; z-index: 5000; cursor: pointer; border: 1.5px solid rgba(255, 255, 255, 0.3); width: 40px; height: 40px; display: flex; items-center: center; justify-content: center; font-size: 18px; border-radius: 50%; background: var(--glass-bg); backdrop-filter: blur(10px); transition: transform 0.3s; }
+        .theme-toggle-btn:active { transform: scale(0.9); }
+
+        .status-bar { height: 44px; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; position: fixed; top: 0; width: 100%; z-index: 5100; background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(0,0,0,0.03); color: var(--text-color); }
+
+        .widget-clock { font-size: 64px; md:font-size: 85px; font-weight: 900; letter-spacing: -4px; color: var(--text-color); line-height: 1; margin-bottom: 5px; }
+
+        /* Inputs & Buttons */
+        .os-input { 
+            background: rgba(255, 255, 255, 0.35); 
+            border: 1.5px solid rgba(255, 255, 255, 0.6); 
+            border-radius: 18px; 
+            width: 100%; outline: none; padding: 1rem; 
+            font-weight: 700; color: var(--text-color);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px var(--neon-color) inset;
+        }
+        .os-input:focus { background: #fff; box-shadow: 0 0 25px var(--neon-color); }
+        .os-btn { 
+            background: var(--primary-accent); color: white; border-radius: 18px; 
+            font-weight: 900; transition: 0.3s; padding: 0.85rem; width: 100%; 
+            text-transform: uppercase; border: 1.5px solid rgba(255, 255, 255, 0.4); 
+            letter-spacing: 1px; box-shadow: 0 8px 30px var(--neon-color);
+            cursor: pointer;
+        }
+
+        /* Pro Zoom Engine */
+        #imageModal { position: fixed; inset: 0; z-index: 8000; background: rgba(0,0,0,0.92); display: none; justify-content: center; align-items: center; backdrop-filter: blur(60px); overflow: hidden; touch-action: none; cursor: zoom-out; }
+        .close-zoom-btn { position: fixed; top: 16px; left: 16px; width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; items-center: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 9001; color: #000; }
+        .zoom-controls { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 9001; padding: 10px 20px; background: rgba(255,255,255,0.2); backdrop-filter: blur(20px); border-radius: 50px; border: 1.5px solid rgba(255, 255, 255, 0.3); }
+        .zoom-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-accent); color: white; display: flex; items-center: center; justify-content: center; font-size: 18px; font-weight: bold; cursor: pointer; border: 1.5px solid rgba(255, 255, 255, 0.3); }
+
+        #zoomedImage { max-width: 90%; max-height: 80%; border-radius: var(--card-radius); border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 0 100px rgba(0,0,0,0.6); cursor: grab; transition: transform 0.12s linear; }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .category-chip { flex: 0 0 auto; padding: 8px 18px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50px; font-size: 10px; font-weight: 900; text-transform: uppercase; cursor: pointer; color: var(--text-color); }
+        .category-chip.active { background: var(--primary-accent); color: white; border-color: transparent; box-shadow: 0 0 15px var(--neon-color); }
+
+        .gallery-item { border: 1.5px solid rgba(255, 255, 255, 0.6); background: var(--glass-bg); border-radius: calc(var(--card-radius) / 2); overflow: hidden; transition: 0.4s var(--anim-curve); cursor: pointer; }
+        
+        #faceIDOverlay { position: fixed; inset: 0; z-index: 9500; background: rgba(0,0,0,0.88); display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(25px); }
+        .scanner-frame { width: 200px; height: 200px; border: 3px solid var(--primary-accent); border-radius: 60px; position: relative; overflow: hidden; box-shadow: 0 0 50px var(--primary-accent); }
+        .scan-line { width: 100%; height: 5px; background: var(--primary-accent); position: absolute; top: 0; left: 0; box-shadow: 0 0 30px var(--primary-accent); animation: scanMove 2.2s infinite linear; }
+        @keyframes scanMove { 0% { top: 0; } 50% { top: 100%; } 100% { top: 0; } }
+
+        .view-container { position: absolute; inset: 0; overflow-y: auto; padding-top: 44px; scroll-behavior: smooth; }
+        .hidden { display: none !important; }
+        .home-bar { position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%); width: 130px; height: 5px; background: rgba(0,0,0,0.15); border-radius: 10px; z-index: 4000; }
+        .modal-overlay { position: fixed; inset: 0; z-index: 7000; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; backdrop-filter: blur(25px); }
+    </style>
+</head>
+<body id="mainBody" class="os-origin">
+
+    <div class="liquid-bg">
+        <div class="blob" style="top: -10%; left: -10%;"></div>
+        <div class="blob" style="bottom: -10%; right: 20%; animation-delay: -5s;"></div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div id="os-time-small">12:00</div>
+        <div class="flex items-center gap-3">
+            <div id="os-status-text">Crystal OS Pro</div>
+            <div class="flex gap-1"><div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div></div>
+        </div>
+    </div>
+
+    <!-- Top Left Controls (Customize Only) -->
+    <div class="top-left-controls" id="headerControls">
+        <button id="loginCustomizeBtn" class="customize-btn glass-panel" onclick="openCustomizeModal()">Customize</button>
+    </div>
+
+    <!-- Theme Toggle Moved to Bottom Left -->
+    <div id="globalThemeToggle" class="theme-toggle-btn glass-panel" onclick="toggleTheme()">
+        <span id="themeIcon">☀️</span>
+    </div>
+
+    <!-- Hub Switcher -->
+    <div id="osSwitcher" class="os-hub-btn" onclick="toggleOSMenu()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    </div>
+
+    <!-- OS Selection -->
+    <div id="osMenu" class="fixed top-[120px] right-[16px] z-[5000] hidden flex flex-col gap-3">
+        <div class="glass-panel p-2 flex flex-col gap-1 w-52 shadow-2xl">
+            <div class="px-5 py-3 hover:bg-white/20 cursor-pointer text-xs font-black transition-all rounded-xl flex items-center justify-between" onclick="setOS('ios')">iOS 18.5 </div>
+            <div class="px-5 py-3 hover:bg-white/20 cursor-pointer text-xs font-black transition-all rounded-xl flex items-center justify-between" onclick="setOS('origin')">OriginOS 6 ◌</div>
+            <div class="px-5 py-3 hover:bg-white/20 cursor-pointer text-xs font-black transition-all rounded-xl flex items-center justify-between" onclick="setOS('gaming')">Gaming OS (ROG) 🎮</div>
+            <div class="px-5 py-3 hover:bg-white/20 cursor-pointer text-xs font-black transition-all rounded-xl flex items-center justify-between" onclick="setOS('nothing')">Nothing OS ⚪</div>
+        </div>
+    </div>
+
+    <!-- FACE ID SCANNER -->
+    <div id="faceIDOverlay">
+        <div class="scanner-frame"><div class="scan-line"></div></div>
+        <p class="text-white font-black tracking-[0.4em] mt-8 text-sm uppercase animate-pulse">Bio-Metric Auth...</p>
+    </div>
+
+    <!-- VIEW 1: LOGIN -->
+    <div id="loginView" class="view-container active flex flex-col items-center justify-center px-6 relative anim-os">
+        <div class="text-center mb-8">
+            <div id="os-widget-clock" class="widget-clock">12:00</div>
+            <div id="os-widget-date" class="text-[10px] font-black tracking-widest opacity-60 uppercase mb-6">Friday, March 13</div>
+            <h1 id="mainHeading" class="text-4xl md:text-6xl font-black tracking-tighter italic" style="color: var(--primary-accent);">GHH<span class="opacity-30">@</span>OFFICIAL</h1>
+        </div>
+
+        <div class="glass-panel p-8 w-full max-w-[400px]">
+            <div class="space-y-4">
+                <div id="userList" class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide"></div>
+                <input type="text" id="username" class="os-input" placeholder="Identity ID">
+                <input type="password" id="password" class="os-input" placeholder="Cipher Key">
+                <button id="loginBtn" onclick="handleLogin()" class="os-btn italic shadow-xl active:scale-95 transition-all">Initialize</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 2: MAIN GALLERY -->
+    <div id="galleryView" class="view-container hidden anim-os">
+        <div class="sticky-header">
+            <div class="px-6 pt-6 pb-2 flex justify-between items-end">
+                <div>
+                    <h1 id="galleryTitle" class="text-4xl font-black italic tracking-tighter uppercase leading-none" style="color: var(--primary-accent);">Vault</h1>
+                    <p id="osTagline" class="text-gray-400 text-[8px] font-black tracking-[0.6em] mt-2 italic uppercase">AUTHENTICATED</p>
+                </div>
+                <div class="flex flex-col gap-2 items-end">
+                    <button onclick="startFaceID()" class="os-btn !bg-black px-4 py-2 text-[8px] tracking-widest font-black uppercase rounded-full border border-white/20 text-white w-auto">Private Vault 🔒</button>
+                    <div class="flex gap-2">
+                        <label for="photo-upload" class="w-8 h-8 glass-panel flex items-center justify-center text-lg cursor-pointer hover:bg-white/50 transition-all">+</label>
+                        <input type="file" id="photo-upload" class="hidden" onchange="handleUpload(event)">
+                        <button onclick="logout()" class="w-8 h-8 glass-panel flex items-center justify-center text-[8px] font-black">OUT</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="smart-dashboard glass-panel mx-6 my-2 p-3">
+                <div class="stat-item">
+                    <p class="opacity-50 text-[8px]">Storage</p>
+                    <div class="w-24 h-1 bg-gray-200 rounded-full overflow-hidden mt-1"><div class="h-full bg-[var(--primary-accent)] w-[84%]"></div></div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span id="activeUserName" class="text-[var(--primary-accent)] font-black text-[10px]">Guest</span>
+                    <div class="w-[30px] h-[14px] border border-black/30 rounded-sm p-[1px] flex items-center">
+                        <div class="bg-green-500 h-full w-[85%]"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-2 px-6 overflow-x-auto pb-1 scrollbar-hide">
+                <div class="category-chip active" onclick="setFilter('All', this)">All</div>
+                <div class="category-chip" onclick="setFilter('People', this)">People</div>
+                <div class="category-chip" onclick="setFilter('Documents', this)">Docs</div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 px-6 py-6" id="gallery-grid"></div>
+    </div>
+
+    <!-- VIEW 3: SECRET FOLDER -->
+    <div id="secretView" class="view-container hidden anim-os">
+        <div class="px-6 py-8 flex justify-between items-center mb-6">
+            <button onclick="exitSecretView()" class="glass-panel w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-black/5">&lt;</button>
+            <h1 class="text-3xl font-black italic uppercase text-center flex-1" style="color: var(--primary-accent);">Secret Library</h1>
+            <div class="w-10"></div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 px-6 pb-12" id="secret-grid"></div>
+    </div>
+
+    <!-- VAULT MODAL -->
+    <div id="vaultModal" class="modal-overlay" onclick="if(event.target === this) hideVaultModal()">
+        <div class="glass-panel p-10 w-full max-w-[360px] m-4 text-center anim-os active" onclick="event.stopPropagation()">
+            <div class="text-5xl mb-4">🛡️</div>
+            <h3 class="text-lg font-black uppercase mb-6 italic">Master Key Required</h3>
+            <input type="password" id="vaultPassword" class="os-input text-center mb-6 text-xl tracking-[0.5em] font-bold" placeholder="••••">
+            <div class="flex gap-3">
+                <button onclick="unlockVault()" class="os-btn flex-1 py-3 text-[10px] tracking-widest font-black">UNLOCK</button>
+                <button onclick="hideVaultModal()" class="glass-panel flex-1 py-3 text-[10px] font-black uppercase text-gray-400 border border-black/10">CANCEL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRO ZOOM MODAL -->
+    <div id="imageModal" onclick="closeImageModal()">
+        <div class="close-zoom-btn" onclick="closeImageModal()">&times;</div>
+        <div class="zoom-controls" onclick="event.stopPropagation()">
+            <div class="zoom-btn" onclick="applyZoomBtn(1.6)">+</div>
+            <div class="zoom-btn" onclick="applyZoomBtn(0.6)">−</div>
+            <div class="zoom-btn" onclick="downloadImage()">💾</div>
+            <div class="zoom-btn" onclick="resetZoom()" style="font-size:12px">↺</div>
+        </div>
+        <img id="zoomedImage" src="" alt="Zoomed" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- CUSTOMIZE MODAL -->
+    <div id="customModal" class="fixed inset-0 hidden items-center justify-center z-[8001] bg-black/40 backdrop-blur-3xl">
+        <div class="glass-panel p-6 w-full max-w-[400px] m-4 anim-os active">
+            <h3 class="text-xl font-black mb-6 text-center uppercase italic">System Setup</h3>
+            <div class="space-y-4">
+                <input type="text" id="newHeadingInput" placeholder="System Title" class="os-input">
+                <div class="p-4 border border-dashed border-gray-300 rounded-2xl glass-panel shadow-none bg-white/10">
+                    <p class="text-[9px] font-black uppercase mb-2 opacity-60">Add User</p>
+                    <input type="text" id="newUsernameInput" placeholder="User ID" class="os-input mb-2 text-sm">
+                    <input type="password" id="newPasswordInput" placeholder="Key" class="os-input text-sm">
+                    <button onclick="addUser()" class="os-btn mt-3 !bg-white !text-black border border-black/10 py-2 text-[10px] tracking-widest font-black">REGISTER</button>
+                </div>
+                <button onclick="saveSystem()" class="os-btn !bg-black !text-white uppercase tracking-widest py-3 text-xs">Save Settings</button>
+                <button onclick="closeCustomizeModal()" class="w-full text-gray-400 text-[11px] font-bold uppercase mt-4 tracking-widest text-center">Abort</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-bar"></div>
+
+    <script>
+        const imageModal = document.getElementById('imageModal');
+        const zoomedImage = document.getElementById('zoomedImage');
+        const loginView = document.getElementById('loginView');
+        const galleryView = document.getElementById('galleryView');
+        const secretView = document.getElementById('secretView');
+        const vaultModal = document.getElementById('vaultModal');
+        const faceIDOverlay = document.getElementById('faceIDOverlay');
+        const osMenu = document.getElementById('osMenu');
+        const customModal = document.getElementById('customModal');
+        const userListEl = document.getElementById('userList');
+        const headerControls = document.getElementById('headerControls');
+        const themeToggle = document.getElementById('globalThemeToggle');
+
+        const ADMIN_PW = 'Gujjar@5757';
+        let currentOS = 'origin';
+        let isDarkMode = false;
+        let scale = 1, translateX = 0, translateY = 0, isDragging = false, startX, startY, lastTouchDist = 0;
+
+        let users = JSON.parse(localStorage.getItem('ghh_users')) || [{u: 'admin', p: ADMIN_PW}];
+
+        const osConfig = {
+            ios: { user: 'Apple ID', pass: 'Bio Code', btn: 'Sign In', title: 'Library', name: 'iOS 18.5', status: 'Bionic Liquid' },
+            origin: { user: 'Atomic ID', pass: 'Cipher Key', btn: 'Initialize', title: 'Vault', name: 'OriginOS 6', status: 'Frozen Glass' },
+            gaming: { user: 'Gamer Tag', pass: 'ROG Pass', btn: 'Overclock', title: 'Arsenal', name: 'Gaming ROG v4', status: 'ROG Cyber' },
+            nothing: { user: 'N-ID', pass: 'Matrix Key', btn: 'Minimize', title: 'Elements', name: 'Nothing OS 2', status: 'Dot Matrix' },
+            samsung: { user: 'One ID', pass: 'PIN', btn: 'Open', title: 'Gallery', name: 'One UI 7' }
+        };
+
+        const imageLib = {
+            All: [
+                "https://images.unsplash.com/photo-150185https://photos.app.goo.gl/RJCZTW4hnroA6wr5A4140801-50d01698950b?w=1200",
+                "https://images.unhttps://drive.google.com/file/d/1UE8J28rkzxxpKeWeKkMOs9K3o0iL9b7H/view?usp=drive_linkplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200",
+                "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200",
+                "https://images.unsplash.com/photo-1500622764614-be3c178224b1?w=1200",
+                "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200",
+                "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1200",
+                "https://images.unsplash.com/photo-1518173946687-a4c8a9b749f5?w=1200",
+                "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1200",
+                "https://images.unsplash.com/photo-1433086566086-014a8c95a150?w=1200",
+                "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=1200",
+                "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1200",
+                "https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=1200",
+                "https://images.unsplash.com/photo-1493246507139-91e8bef99c17?w=1200",
+                "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200",
+                "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200",
+                "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200",
+                "https://images.unsplash.com/photo-1431440866041-ad8003f036ee?w=1200",
+                "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=1200",
+                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200",
+                "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200"
+            ],
+            People: [
+                "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=1200",
+                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200",
+                "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200"
+            ],
+            Documents: [
+                "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200",
+                "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200"
+            ]
+        };
+
+        const secretPics = ["https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1200", "https://images.unsplash.com/photo-1433086566086-014a8c95a150?w=1200"];
+
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('os-time-small').innerText = timeStr;
+            const wClock = document.getElementById('os-widget-clock'); if(wClock) wClock.innerText = timeStr;
+            const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+            const wDate = document.getElementById('os-widget-date'); if(wDate) wDate.innerText = dateStr;
+        }
+        setInterval(updateTime, 1000); updateTime();
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            document.getElementById('themeIcon').innerText = isDarkMode ? '🌙' : '☀️';
+        }
+
+        function toggleOSMenu() { osMenu.classList.toggle('hidden'); }
+
+        function setOS(os) {
+            currentOS = os;
+            document.body.className = `os-${os}` + (isDarkMode ? ' dark-mode' : '');
+            const config = osConfig[os];
+            if(!config) return;
+
+            const sub = document.getElementById('osSubtitle'); if(sub) sub.innerText = config.name;
+            const userIn = document.getElementById('username'); if(userIn) userIn.placeholder = config.user;
+            const passIn = document.getElementById('password'); if(passIn) passIn.placeholder = config.pass;
+            const lBtn = document.getElementById('loginBtn'); if(lBtn) lBtn.innerText = config.btn;
+            const sText = document.getElementById('os-status-text'); if(sText) sText.innerText = config.status || 'Ultimate Pro';
+            
+            const activeView = [loginView, galleryView, secretView].find(v => v && !v.classList.contains('hidden'));
+            if(activeView) {
+                const gTitle = document.getElementById('galleryTitle');
+                if(activeView === galleryView && gTitle) gTitle.innerText = config.title;
+                triggerAnim(activeView);
+            }
+            osMenu.classList.add('hidden');
+        }
+
+        function triggerAnim(el) {
+            if(!el) return;
+            el.classList.remove('active');
+            void el.offsetWidth;
+            el.classList.add('active');
+        }
+
+        function refreshUserList() {
+            if(!userListEl) return;
+            userListEl.innerHTML = '';
+            users.forEach(user => {
+                const btn = document.createElement('div');
+                btn.className = "px-3 py-1.5 glass-panel text-[8px] font-black cursor-pointer whitespace-nowrap active:scale-95";
+                btn.innerText = user.u.toUpperCase();
+                btn.onclick = () => { document.getElementById('username').value = user.u; };
+                userListEl.appendChild(btn);
+            });
+        }
+
+        function handleLogin() {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            const valid = users.find(user => user.u === u && user.p === p) || (u === '' && p === '');
+            if (valid) {
+                loginView.classList.add('hidden');
+                headerControls.classList.add('hidden');
+                galleryView.classList.remove('hidden');
+                themeToggle.classList.add('hidden'); // Hide theme toggle on gallery for cleaner look
+                const activeU = document.getElementById('activeUserName'); if(activeU) activeU.innerText = u || 'Root';
+                triggerAnim(galleryView);
+                renderGrid('gallery-grid', imageLib.All);
+            } else { alert("Login Details Mismatch"); }
+        }
+
+        function renderGrid(containerId, images) {
+            const grid = document.getElementById(containerId);
+            if(!grid) return;
+            grid.innerHTML = '';
+            images.forEach(url => {
+                const div = document.createElement('div');
+                div.className = `gallery-item aspect-square glass-panel`;
+                div.innerHTML = `<img src="${url}" class="w-full h-full object-cover" onclick="openImageModal('${url}')">`;
+                grid.appendChild(div);
+            });
+        }
+
+        function startFaceID() {
+            faceIDOverlay.style.display = 'flex';
+            setTimeout(() => {
+                faceIDOverlay.style.display = 'none';
+                showVaultModal();
+            }, 2500);
+        }
+
+        function showVaultModal() { vaultModal.style.display = 'flex'; document.getElementById('vaultPassword').focus(); }
+        function hideVaultModal() { vaultModal.style.display = 'none'; document.getElementById('vaultPassword').value = ''; }
+
+        function unlockVault() {
+            const passValue = document.getElementById('vaultPassword').value;
+            if(passValue === ADMIN_PW) {
+                hideVaultModal();
+                galleryView.classList.add('hidden');
+                secretView.classList.remove('hidden');
+                setTimeout(() => {
+                    triggerAnim(secretView);
+                    renderGrid('secret-grid', secretPics);
+                }, 50);
+            } else { 
+                alert("MASTER KEY MISMATCH"); 
+                document.getElementById('vaultPassword').value = '';
+            }
+        }
+
+        function exitSecretView() { secretView.classList.add('hidden'); galleryView.classList.remove('hidden'); triggerAnim(galleryView); }
+        function logout() { location.reload(); }
+
+        function openImageModal(url) { zoomedImage.src = url; imageModal.style.display = 'flex'; resetZoom(); }
+        function closeImageModal() { imageModal.style.display = 'none'; }
+        function resetZoom() { scale = 1; translateX = 0; translateY = 0; updateTransform(); }
+        function updateTransform() { zoomedImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`; }
+
+        function applyZoomPoint(factor, clientX, clientY) {
+            let newScale = Math.min(Math.max(1, scale * factor), 12);
+            const rect = zoomedImage.getBoundingClientRect();
+            const x = clientX - (rect.left + rect.width / 2);
+            const y = clientY - (rect.top + rect.height / 2);
+            const ratio = (newScale / scale) - 1;
+            translateX -= x * ratio; translateY -= y * ratio;
+            scale = newScale; updateTransform();
+        }
+        function applyZoomBtn(f) { applyZoomPoint(f, window.innerWidth / 2, window.innerHeight / 2); }
+
+        async function downloadImage() {
+            const url = zoomedImage.src;
+            try {
+                const res = await fetch(url);
+                const blob = await res.blob();
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob); a.download = "GHH_Photo.jpg";
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            } catch (e) { alert("Download failed"); }
+        }
+
+        imageModal.addEventListener('wheel', (e) => { e.preventDefault(); applyZoomPoint(e.deltaY > 0 ? 0.85 : 1.15, e.clientX, e.clientY); }, { passive: false });
+        zoomedImage.addEventListener('mousedown', (e) => { if (scale > 1) { isDragging = true; startX = e.clientX - translateX; startY = e.clientY - translateY; zoomedImage.style.transition = "none"; } });
+        window.addEventListener('mousemove', (e) => { if (!isDragging) return; translateX = e.clientX - startX; translateY = e.clientY - startY; updateTransform(); });
+        window.addEventListener('mouseup', () => { isDragging = false; zoomedImage.style.transition = "transform 0.12s linear"; });
+
+        function setFilter(cat, chip) {
+            document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            renderGrid('gallery-grid', imageLib[cat] || imageLib.All);
+        }
+
+        function openCustomizeModal() { customModal.classList.remove('hidden'); customModal.classList.add('flex'); }
+        function closeCustomizeModal() { customModal.classList.add('hidden'); }
+        
+        function addUser() {
+            const u = document.getElementById('newUsernameInput').value;
+            const p = document.getElementById('newPasswordInput').value;
+            if(u && p) {
+                users.push({u, p});
+                localStorage.setItem('ghh_users', JSON.stringify(users));
+                refreshUserList();
+                document.getElementById('newUsernameInput').value = '';
+                document.getElementById('newPasswordInput').value = '';
+                alert("Identity Committed");
+            }
+        }
+
+        function saveSystem() {
+            const h = document.getElementById('newHeadingInput').value;
+            if(h) { document.getElementById('mainHeading').innerText = h; localStorage.setItem('ghh_title', h); }
+            closeCustomizeModal();
+        }
+
+        window.onload = () => { 
+            const savedT = localStorage.getItem('ghh_title');
+            if(savedT) document.getElementById('mainHeading').innerText = savedT;
+            refreshUserList();
+            triggerAnim(loginView);
+            renderGrid('gallery-grid', imageLib.All); 
+        };
+    </script>
+</body>
+</html>
