@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GHH@OFFICIAL - Ultimate OS Pro v34.4 Clean Identities</title>
+    <title>GHH@OFFICIAL - Ultimate OS Pro v34.5 Custom Photos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import7 url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         :root {
             --primary-accent: #3b82f6;
@@ -55,7 +55,6 @@
         .notch { position: fixed; top: 8px; left: 50%; transform: translateX(-50%); width: 130px; height: 28px; background: black; border-radius: 20px; z-index: 10000; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: 800; }
         .status-bar { height: 44px; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; position: fixed; top: 38px; width: 100%; z-index: 9000; color: var(--text-color); }
 
-        /* Controls Layout */
         .top-controls { position: fixed; top: 85px; left: 0; width: 100%; padding: 0 16px; display: flex; justify-content: space-between; z-index: 9500; pointer-events: none; }
         .btn-action { pointer-events: auto; padding: 10px 18px; border-radius: 14px; font-size: 10px; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.2s; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .btn-action:active { transform: scale(0.9); }
@@ -65,50 +64,23 @@
         .os-input { background: rgba(255, 255, 255, 0.2); border: 1.5px solid rgba(255, 255, 255, 0.4); border-radius: 18px; width: 100%; outline: none; padding: 1.1rem; font-weight: 700; color: var(--text-color); transition: 0.3s; }
         .os-btn { background: var(--primary-accent); color: white; border-radius: 18px; font-weight: 900; transition: 0.3s; padding: 1rem; width: 100%; text-transform: uppercase; border: 1.5px solid rgba(255, 255, 255, 0.3); cursor: pointer; }
 
-        .user-bubble { padding: 10px 22px; border-radius: 16px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.25); font-size: 11px; font-weight: 800; cursor: pointer; white-space: nowrap; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .user-bubble:active { transform: scale(0.92) translateY(2px); background: var(--primary-accent); color: white; }
-        .user-bubble.active { background: var(--primary-accent); color: white; border-color: transparent; }
-
-        /* OS ANIMATIONS HUB */
-        .anim-os { will-change: transform, opacity, filter; opacity: 0; transition: 0.5s; }
-        .anim-os.active { opacity: 1; }
-        .os-origin .anim-os.active { animation: originFocus 0.8s var(--anim-curve) forwards; }
-        .os-ios .anim-os.active { animation: iosSpring 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
-        .os-realme .anim-os.active { animation: realmePop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .os-nothing .anim-os.active { animation: nothingDot 1s steps(4) forwards; }
-        .os-hyper .anim-os.active { animation: hyperBlur 0.8s ease-in-out forwards; }
-        .os-gaming .anim-os.active { animation: gamingGlitch 0.4s steps(3) forwards; }
-
-        @keyframes hyperBlur { 0% { filter: blur(30px); transform: scale(1.1); opacity: 0; } 100% { filter: blur(0); transform: scale(1); opacity: 1; } }
-        @keyframes realmePop { 0% { transform: scale(0.8) translateY(20px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
-        @keyframes iosSpring { 0% { transform: scale(0.9); } 100% { transform: scale(1); } }
-        @keyframes originFocus { 0% { filter: blur(60px); opacity: 0; transform: scale(1.1); } 100% { filter: blur(0); transform: scale(1); } }
-        @keyframes gamingGlitch { 0% { transform: translate(10px); opacity: 0; filter: hue-rotate(90deg); } 50% { transform: translate(-10px); opacity: 0.5; } 100% { transform: translate(0); opacity: 1; filter: hue-rotate(0); } }
-        @keyframes nothingDot { 0% { filter: contrast(2); letter-spacing: 10px; opacity: 0; } 100% { filter: contrast(1); letter-spacing: normal; opacity: 1; } }
-
-        .sticky-header { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); padding: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .category-chip { flex: 0 0 auto; padding: 10px 20px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; font-size: 10px; font-weight: 800; margin-right: 10px; white-space: nowrap; cursor: pointer; color: var(--text-color); }
-        .category-chip.active { background: var(--primary-accent); color: white; border-color: transparent; }
-
-        .gallery-grid { padding-bottom: 110px; }
-        .gallery-item { border: 1.2px solid rgba(255, 255, 255, 0.5); background: var(--glass-bg); border-radius: var(--gallery-item-radius); overflow: hidden; transition: 0.3s ease; cursor: pointer; aspect-ratio: 1; }
+        .user-bubble { padding: 10px 22px; border-radius: 16px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.25); font-size: 11px; font-weight: 800; cursor: pointer; white-space: nowrap; transition: 0.3s; }
+        .user-bubble.active { background: var(--primary-accent); color: white; border-color: transparent; box-shadow: 0 0 15px var(--neon-color); }
 
         .dynamic-dock-container { position: fixed; bottom: 12px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; z-index: 11000; pointer-events: none; }
         .dynamic-dock { pointer-events: auto; width: 92%; max-width: 360px; height: 70px; display: flex; align-items: center; justify-content: space-around; border-radius: 26px; background: rgba(255, 255, 255, 0.15); border: 1.5px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(25px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .dock-item { font-size: 26px; cursor: pointer; transition: 0.3s; padding: 12px; border-radius: 16px; }
-        .dock-item:active { transform: scale(0.7) translateY(-10px); background: rgba(255,255,255,0.25); }
-
+        
         #cornerSliderPanel { width: 240px; padding: 20px; margin-bottom: 15px; display: none; pointer-events: auto; }
 
-        #imageModal { position: fixed; inset: 0; z-index: 15000; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; }
-        #zoomedImage { max-width: 100%; max-height: 100%; transition: transform 0.1s linear; will-change: transform; pointer-events: auto; }
-        .zoom-ui-overlay { position: fixed; bottom: 35px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 15005; pointer-events: auto; }
-        .zoom-btn-circle { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); color: white; display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; backdrop-filter: blur(12px); }
+        .gallery-grid { padding-bottom: 110px; }
+        .gallery-item { border: 1.2px solid rgba(255, 255, 255, 0.5); background: var(--glass-bg); border-radius: var(--gallery-item-radius); overflow: hidden; transition: 0.3s ease; cursor: pointer; aspect-ratio: 1; }
 
-        .modal-overlay { position: fixed; inset: 0; z-index: 14000; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; backdrop-filter: blur(25px); }
+        .view-container { position: absolute; inset: 0; overflow-y: auto; padding-top: 38px; scroll-behavior: smooth; }
+        .hidden { display: none !important; }
 
         #faceIDOverlay { position: fixed; inset: 0; z-index: 13000; background: rgba(0,0,0,0.92); display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-        .scanner-frame { width: 220px; height: 220px; border: 3px solid var(--primary-accent); border-radius: 60px; position: relative; overflow: hidden; box-shadow: 0 0 50px var(--primary-accent); }
+        .scanner-frame { width: 220px; height: 220px; border: 3px solid var(--primary-accent); border-radius: 60px; position: relative; overflow: hidden; }
         .scan-line { width: 100%; height: 6px; background: var(--primary-accent); position: absolute; top: 0; animation: scanMove 2s infinite linear; }
         @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
 
@@ -116,11 +88,15 @@
         .boot-bar { width: 180px; height: 4px; background: #222; border-radius: 2px; margin-top: 25px; overflow: hidden; }
         .boot-fill { height: 100%; background: var(--primary-accent); width: 0%; transition: 2.5s linear; }
 
-        .view-container { position: absolute; inset: 0; overflow-y: auto; padding-top: 38px; scroll-behavior: smooth; }
-        .hidden { display: none !important; }
+        #imageModal { position: fixed; inset: 0; z-index: 15000; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; }
+        #zoomedImage { max-width: 100%; max-height: 100%; transition: transform 0.1s linear; will-change: transform; pointer-events: auto; }
+        .zoom-ui-overlay { position: fixed; bottom: 35px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 15005; pointer-events: auto; }
+        .zoom-btn-circle { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); color: white; display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; backdrop-filter: blur(12px); }
 
-        #gamingStats { position: fixed; top: 135px; right: 16px; font-family: monospace; font-size: 10px; color: #ff003c; text-align: right; z-index: 4000; display: none; }
-        .os-gaming #gamingStats { display: block; }
+        .sticky-header { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); padding: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .category-chip { flex: 0 0 auto; padding: 10px 20px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; font-size: 10px; font-weight: 800; margin-right: 10px; white-space: nowrap; cursor: pointer; color: var(--text-color); }
+        .category-chip.active { background: var(--primary-accent); color: white; border-color: transparent; }
+        
         #osSwitcherPage2 { position: fixed; top: 85px; right: 16px; z-index: 9500; }
     </style>
 </head>
@@ -143,15 +119,18 @@
         </div>
     </div>
 
+    <!-- Page 1 Only Controls -->
     <div class="top-controls" id="loginControls">
         <div class="btn-action shadow-lg" id="custBtn" onclick="openCustomizeModal()">⚙️ Customize</div>
         <div class="btn-circle shadow-lg" id="switcherBtn" onclick="toggleOSMenu()">💠</div>
     </div>
 
+    <!-- Page 2 Switcher -->
     <div id="osSwitcherPage2" class="hidden">
         <div class="btn-circle shadow-lg" onclick="toggleOSMenu()">💠</div>
     </div>
 
+    <!-- OS Selection Menu -->
     <div id="osMenu" class="fixed top-[140px] right-[16px] z-[10000] hidden flex flex-col gap-2">
         <div class="glass-panel p-2 flex flex-col gap-1 w-48 shadow-2xl overflow-y-auto max-h-[70vh]">
             <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('ios')">iOS </div>
@@ -167,11 +146,13 @@
         </div>
     </div>
 
+    <!-- BOOT SCREEN -->
     <div id="bootScreen" style="display: none;">
         <h2 class="text-[10px] font-black tracking-[0.5em] uppercase opacity-80">Initializing Secure System</h2>
         <div class="boot-bar"><div class="boot-fill" id="bootProgress"></div></div>
     </div>
 
+    <!-- VIEW 1: LOGIN -->
     <div id="loginView" class="view-container active flex flex-col items-center justify-center px-6 anim-os">
         <div class="text-center mb-10 mt-20">
             <div id="os-widget-clock" class="text-7xl font-black mb-1">00:00</div>
@@ -181,13 +162,14 @@
             <div class="space-y-5">
                 <p class="text-[9px] font-black uppercase opacity-40 ml-1">Identity Selection</p>
                 <div id="userList" class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide"></div>
-                <input type="text" id="username" class="os-input text-sm" placeholder="Enter Identity ID" autocomplete="off">
-                <input type="password" id="password" class="os-input text-sm" placeholder="Enter Cipher Key" autocomplete="off">
+                <input type="text" id="username" class="os-input text-sm" placeholder="Enter Identity ID" autocomplete="off" value="">
+                <input type="password" id="password" class="os-input text-sm" placeholder="Enter Cipher Key" autocomplete="off" value="">
                 <button onclick="handleLoginWithBoot()" class="os-btn shadow-lg active:scale-95">Initialize</button>
             </div>
         </div>
     </div>
 
+    <!-- VIEW 2: GALLERY -->
     <div id="galleryView" class="view-container hidden anim-os">
         <div class="sticky-header">
             <div class="flex justify-between items-end mb-4">
@@ -204,6 +186,7 @@
         <div class="grid grid-cols-2 gap-3 px-4 py-6 gallery-grid" id="gallery-grid"></div>
     </div>
 
+    <!-- VIEW 3: SECRET -->
     <div id="secretView" class="view-container hidden anim-os">
         <div class="px-6 py-10 flex justify-between items-center mb-4">
             <button onclick="exitSecretView()" class="glass-panel w-10 h-10 flex items-center justify-center font-black">&lt;</button>
@@ -212,6 +195,7 @@
         <div class="grid grid-cols-2 gap-3 px-4 pb-24 gallery-grid" id="secret-grid"></div>
     </div>
 
+    <!-- NAVIGATION DOCK -->
     <div id="mainDockContainer" class="dynamic-dock-container hidden">
         <div id="cornerSliderPanel" class="glass-panel shadow-2xl">
             <p class="text-[10px] font-black uppercase mb-3 opacity-60 text-center">Photo Border Radius</p>
@@ -226,6 +210,7 @@
         </div>
     </div>
 
+    <!-- MODALS -->
     <div id="vaultModal" class="modal-overlay" style="display: none;" onclick="hideVaultModal()">
         <div class="glass-panel p-10 w-full max-w-[340px] text-center" onclick="event.stopPropagation()">
             <div class="text-5xl mb-4">🛡️</div>
@@ -258,6 +243,7 @@
         <div class="glass-panel p-6 w-full max-w-[380px] m-4" onclick="event.stopPropagation()">
             <h3 class="text-xl font-black mb-6 text-center uppercase italic">OS Configuration</h3>
             <input type="text" id="newHeadingInput" placeholder="System Display Title" class="os-input mb-4">
+            
             <div class="p-3 border border-black/10 rounded-xl mb-4">
                 <p class="text-[9px] font-black uppercase mb-2 opacity-50 text-center">Background System</p>
                 <div class="flex gap-2">
@@ -266,6 +252,7 @@
                     <button onclick="setWallpaper('solid')" class="flex-1 py-1.5 text-[9px] border border-black/20 rounded-lg">Solid</button>
                 </div>
             </div>
+
             <div class="p-4 border border-dashed border-gray-300 rounded-2xl bg-white/5 mb-4">
                 <p class="text-[9px] font-black uppercase mb-2 opacity-60 text-center">Identity Management</p>
                 <input type="text" id="newUsernameInput" placeholder="New ID" class="os-input mb-2 text-sm">
@@ -279,257 +266,8 @@
         </div>
     </div>
 
+    <div class="home-bar"></div>
+
     <script>
         const imageModal = document.getElementById('imageModal');
-        const zoomedImage = document.getElementById('zoomedImage');
-        const loginView = document.getElementById('loginView');
-        const galleryView = document.getElementById('galleryView');
-        const secretView = document.getElementById('secretView');
-        const vaultModal = document.getElementById('vaultModal');
-        const faceIDOverlay = document.getElementById('faceIDOverlay');
-        const osMenu = document.getElementById('osMenu');
-        const customModal = document.getElementById('customModal');
-        const userListEl = document.getElementById('userList');
-        const categoryBar = document.getElementById('categoryBar');
-        const wallpaperLayer = document.getElementById('wallpaperLayer');
-        const mainDockContainer = document.getElementById('mainDockContainer');
-        const loginControls = document.getElementById('loginControls');
-        const osSwitcherPage2 = document.getElementById('osSwitcherPage2');
-
-        const ADMIN_PW = 'Gujjar@5757';
-        let currentOS = 'origin';
-        let isDarkMode = false;
-        
-        let scale = 1, translateX = 0, translateY = 0, isDragging = false, startX = 0, startY = 0;
-        let initialPinchDist = 0, lastScale = 1;
-
-        const defaultUsers = [{u: 'Gautam', p: '5757'}, {u: 'Hemant', p: '5757'}, {u: 'Aman', p: '5757'}];
-        let users = JSON.parse(localStorage.getItem('ghh_users')) || defaultUsers;
-
-        /* ==========================================
-           यहाँ अपनी इमेजेस की लिंक पेस्ट करें
-        ========================================== */
-        const imageLib = {
-            JODHPUR: [
-                "https://lh3.googleusercontent.com/pw/AP1GczMTZZMB_rziHj5IKn6GPwYxTiVIK75jqpAXp_G2i0bTLRQQeaKcFYxLGN2FMvGce_GeknW0mRKjhMS4K71GKUf8m2cP9WrBRvPQoqXS87SiigUljpk2=w2400", 
-                "https://lh3.googleusercontent.com/pw/AP1GczNJjU-_D7Td_GqOh60V4ZmOtCw2GEcl7GR9veVX27pWH1opYJ7p6SOPzOPXJfG9YNJvpu2UBrjj7INvk-qiRJsRElVe05NDJNOfDVAKW1YH3V_ZTZcx=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczN1GjWQ_gd5JAnJ4YUij76LtONCRx-kKQrGEbMSRZKMzX3uFT0DajnqjVOaWx1PLtsM43_LdsYMgfvNZNF46_HxgpyP5jSV8wAmmiGXPQcTLVlZPQTr=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPcoTtY-eKZxZ0AQKKxyPNc6EHJ5dQlkNkSS2leE0rTtpwntsGJiGhJvZ2K6BVhF50rAODUYo0wijg2aEJnzF5C88EoflmrdqtlO7PcFHr_0Da8FDJj=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczNRhCYX1r6H19PjCJ_z1TCqbshGI7s-Gxs7i3oMmzbJFXpcE1GUSbtI7IfLhxomrt35j0zkIVVM5L952p93SgOL2DaKCEQFh290axOTEsfQFC5OO1Lb=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczNqT9xWWbZDYjAR6lVHVddB0ZgXcbLhnXKVo92NDj6NeA4SFgH40qc6IlJd4xXVNnlPwK6Urj43Kcfp1CWaLjPTOzu8AVksA_G9ZMbTQfcu4WO2COxg=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczP3eh9cdSSmXWOz2-DryWIaWOZ0AkzwhwzTe9Cl3l-FxHEhsRFB682t42uzhoinmRHf3iGBy3uYtxLG5KqWkR6gN_APkljGYDb3fw1TRUsStr_fJkuN=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczOacISJX81AvJjUqli-HZ0nsXxGm3-6U_a2NXrx770dml9odyOIsuSSu1SZ2RKyIcRPXA3Ie2uvVhwItLXF2aL5LXZcNxaqsfn37gDXEsLrjyf3CIWu=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczO65BBqtekoI_lE_wvu6kWSa5Gkjk7BuKHFD_LjYdWtAQQr7ieTmvYHMGpRr6bDa5yx8EYTK0NdXrg8I0UQab-_4CSe--sLQHEFZb2Y59BNCyI11gcu=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPuXzl9wKYxUSAFwkTvOkRut96FZG4o88_f_CDWodEssPccimR4Ni7UoKpfchV0nHIENqyoVxC0ehV4Ix91pbkgVWYrV5OtHz9-KJJuqO-acYIJpKuW=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPI_xgE4-J_hwNhocI-LPJ1Ye9N8i_X9S_vP6hu9f_VUGIm9idBDAem3HyoyyJ-ZNXCEd6Qv2-JGi_FG-EiokoQC5hq8vktZNE1zy5sEGUbhg9CZOsU=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczMFZSnzdJ_C3iRq7iyG6vjlYnKcBTkse-9Lim2AuLyDEB9o3ayy45KykwVbI3zYBI6fOhyLbS7IsUhtuFm7KxUUQH4MYS0hOuTE7Y8ee8Ukv2q29yBM=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczMdWFCEgyR1OyNbxM1QmLoEZBRphr-rbMA_a8zP2h25PAFt2P0Q1e0eOXhTW4m1Zr6vKk9Izjc3t4yJjWlNa2wcdbwiqcXMuYGJ6QKc2RpNTOrEMkoC=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczNvfjAXYGaQdJQRVPZBoh7RSOfiXsh-NF2OjjjXeTov-OjnvLfbym8Vp9YapfqqdDLj5HElKQdt99_sjtEc4ihKpmh-FQsb_l9_mKZ5_rDlNRgcKJUd=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczMv7jnvJAZd_JJHgbgZ8mFSPwDpAZNiC3e_tMIrxFuAu-qSa3Xs0yoj716wSMwF446zS6nzR_vjaCoGL21BhAydEoVNi3IXV6DxX2QQVmNGLC1dqODX=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczNlh26PUJyhUFSIfXsmUDAaXkb6xGH1iXUjTpGmdnCKdTFkTDGwZ172f6kvs9GsMqNuz7qIye_x4NFmnD1aIq-czJTUwlkuQlTViMstdzkDopEwzCAB=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczMOlZcA-uN6V-90-QKjfB_1XtVe_b9f3hAPz_9zwheBDXSZD6q0JAK8lr4rxoMGGw3f36rYYynSWoJKoOdarFIhMZCz03ysq4YmvTjSEjsk9RVvOCRV=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczOxEAD3mnVd0Mpt9F8O7iRQf0flgtqX3pUX3jM7Cfj-IkSmWkHi-hwgHOO76xF2jYVAJSylTdb01jnPB5i4udTSeZ5dl5lIecq0sTdS01rse272HntL=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPKLR07Qrp_87_8zi4ukjCj5KiBMsqEntIrZorYa3xoScv09UxbGwbxD0Ep3e1xc7GXUd9vAzPbjk0Yq2ZwmPu0Sv5xjG4vh3ptilnjhwG8dWfAsT9i=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczOt8wdK2me7-JNpN3_7KixTILrEqatYg19TXvLi-lr1d44u03RCHiK3iW8UOuvODfMHTlWi5i-Hgtu67hjlXTphUTW-nXk6RJtOAjrf9rCgcaGxrbak=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczOKK6_06ax62t5T18Wp6ZVjVmgzZdpOU4U1FUwkdUnzMTzqh3td_YJUg-YV40kAvgk6fuHwO_6AYXb1greNdTfzS9eyOyKJ1lRCs8TJ17TPsDzrQyrT=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPY4QNaF3Hi_GkAuvdd-50bNUg5myrko2bNE9ZB3swtAy4WcPl6UThFQZrARIfEMhvYazOVnLUzdPT8dpimLTDux0eHHKCIK6bDL8hxKq2KSxu-2eEP=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczP6IhNXF0WednDrICsTirjmJ2qnwV_fJcI3h_G-sFWZN_Wal0UZrjMEoMKaQMroVL8fg0e3JmKTOfcBUWc8b0ruINKiZ25aXOHH0KA3wQIvS2UhtbnV=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPe4d1yJLGTSD06RgTNp9DkV_4pkvCAn1lpygaSPcDnVz-JxEpOrHj30B3yMml7Lb3aFAc83fHSPCqcIvAitwfmR072eVcwqhnl55pWcVKUO2S7lqoJ=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczNhj8hWQGvYYfaqlf-LYGMD0TL0ThfwDjcj_dN_V_s-goxLogWB6w1ax7SYGnKe9wZOCwPq7eNcnwSz-mr30BHcu6g-bSdU8-5yUB0Y0iHCX7qz-Sj4=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczP2n7pk1E225vFv9VMs2rb2H6Q06GUhH4WNwf_OaE5ew1QGapt_xeSj2YQozi7fbklKijszXehXRVg-SNZGSjhuM0QzIxB2fkMz1sEkK_zsGsCqBEsC=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczP2n7pk1E225vFv9VMs2rb2H6Q06GUhH4WNwf_OaE5ew1QGapt_xeSj2YQozi7fbklKijszXehXRVg-SNZGSjhuM0QzIxB2fkMz1sEkK_zsGsCqBEsC=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczNImNpB7-mDDrgUuaOwX1Ag-gcTcYYuCgLjEUHjqCOVo0dOwSIxgoFeTvUy9O1wuDHFEFZnfZhlM7spVKqmm0SsXjFRCugcrsvwzAXQiO5MOFusdcQA=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczO-GjjxCR2st-ovaPz73ElRBMrnxVUqPrFQVlYgs9nG8-odsmCy3RHtJjljtNRoFuH3V6uaF14a8714MpCSJ0bdoBFzlb_oikKYl5HgRwM5MZims4XW=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPEONKFlh5wMGO2dApt8_QcUKDJlCW9b7Wn1jABIa0kUwh5pO__bF-8xkouaXngA9jhLJGEPnvTpMMiO7Rd-Bsm68A6-1HduFrRgXE_NzTbl_JxySwv=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczNKfiV_MUILLNw_j21xFeHOzP9a6CjmOJaPsq7St67FDkT74qvfl63NJXiulkkORH6AEAJO_VrT7u2QO7druzNsClkjmjkQPTlpOamjL01AEpS4M-n0=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczM7Jxb0ZHXmANYMosMl2nVwlvy3LiwnZd86oF9TKsl3MxTj91F17NsgMlDIrcAPlM3FVyN3uZAFv_4hH-warywFdHM-El7VrlOv9KrjYwm0QL5udL02=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPPeuGsBq4_FNTevAg8-sEI-oG5PUsGFDuCGMp6bNZXH-sen09LKPuTdXL_Pbnm73_sTJociq1VJ6kWhjRZ-9TrCKZ2UcQhQmWHk_h6J63TxnlcpkRu=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczPwIKTdEq0uQqHBXI5KLL5IuvL50c85MK0CsC4JWjnSKKbKLe4NnWOwZrHY0XBOe7IHQ4xncRPW1AeSxVDfA6r_o7-K2bcAdYJX6k4TbeKJTF7lF1-E=w2400",
-                "https://lh3.googleusercontent.com/pw/AP1GczMg3loBB198rBI0ouLdJuMbgImDAwoUSXO7tFyNjuJ5fQTFpMYovUWsHy1No84PXlUVV887dGxyz-uU0Gbq8JUQdqaudyZ5uMN9Q5Q68wTqmmSWciuX=w2400",
-            ],
-            People: [
-                "https://picsum.photos/800/800?random=3"
-            ],
-            Documents: [
-                "https://picsum.photos/800/800?random=4"
-            ],
-            "Sec 1": ["https://picsum.photos/800/800?random=5"],
-            "Sec 2": ["https://picsum.photos/800/800?random=6"],
-            "Sec 3": ["https://picsum.photos/800/800?random=7"],
-            "Sec 4": ["https://picsum.photos/800/800?random=8"],
-            "Sec 5": ["https://picsum.photos/800/800?random=9"]
-        };
-
-        /* सीक्रेट तिजोरी के लिए फोटोज */
-        const secretPics = [
-            "https://picsum.photos/800/800?random=10",
-            "https://picsum.photos/800/800?random=11"
-        ];
-        /* ========================================== */
-
-        function initCategoryBar() {
-            categoryBar.innerHTML = '';
-            Object.keys(imageLib).forEach((cat, idx) => {
-                const chip = document.createElement('div');
-                chip.className = `category-chip ${idx === 0 ? 'active' : ''}`;
-                chip.innerText = cat;
-                chip.onclick = () => setFilter(cat, chip);
-                categoryBar.appendChild(chip);
-            });
-        }
-
-        function handleLoginWithBoot() {
-            const u = document.getElementById('username').value, p = document.getElementById('password').value;
-            const valid = users.find(user => user.u === u && user.p === p);
-            if (valid) {
-                document.getElementById('bootScreen').style.display = 'flex';
-                setTimeout(() => document.getElementById('bootProgress').style.width = '100%', 50);
-                setTimeout(() => {
-                    document.getElementById('bootScreen').style.display = 'none';
-                    loginView.classList.add('hidden');
-                    loginControls.classList.add('hidden'); 
-                    osSwitcherPage2.classList.remove('hidden'); 
-                    galleryView.classList.remove('hidden');
-                    mainDockContainer.classList.remove('hidden');
-                    triggerAnim(galleryView);
-                    renderGrid('gallery-grid', imageLib.All);
-                }, 2600);
-            } else { alert("ACCESS DENIED!"); }
-        }
-
-        function renderGrid(containerId, images) {
-            const grid = document.getElementById(containerId);
-            if(!grid) return;
-            grid.innerHTML = '';
-            images.forEach(url => {
-                const div = document.createElement('div');
-                div.className = `gallery-item glass-panel`;
-                div.innerHTML = `<img src="${url}" class="w-full h-full object-cover" loading="lazy" onclick="openImageModal('${url}')">`;
-                grid.appendChild(div);
-            });
-        }
-
-        function setOS(os) {
-            currentOS = os;
-            document.body.className = `os-${os}` + (isDarkMode ? ' dark-mode' : '');
-            document.getElementById('os-brand-logo').innerText = {ios:'', origin:'◌', realme:'◉', hyper:'✧', gaming:'🎮', oxygen:'⚡', oneui:'🔵', nothing:'⚪', pixel:'💎', rog:'👺'}[os] || '◌';
-            osMenu.classList.add('hidden');
-            const active = [loginView, galleryView, secretView].find(v => !v.classList.contains('hidden'));
-            if(active) triggerAnim(active);
-        }
-
-        function triggerAnim(el) {
-            if(!el) return;
-            el.classList.remove('active');
-            void el.offsetWidth;
-            el.classList.add('active');
-        }
-
-        function startFaceID() {
-            faceIDOverlay.style.display = 'flex';
-            setTimeout(() => {
-                faceIDOverlay.style.display = 'none';
-                showVaultModal();
-            }, 2000);
-        }
-
-        function showVaultModal() { vaultModal.style.display = 'flex'; document.getElementById('vaultPassword').focus(); }
-        function hideVaultModal() { vaultModal.style.display = 'none'; }
-        
-        function unlockVault() {
-            if(document.getElementById('vaultPassword').value === ADMIN_PW) {
-                hideVaultModal(); 
-                galleryView.classList.add('hidden');
-                osSwitcherPage2.classList.add('hidden');
-                mainDockContainer.classList.add('hidden');
-                secretView.classList.remove('hidden'); 
-                triggerAnim(secretView);
-                renderGrid('secret-grid', secretPics);
-            } else { alert("MASTER KEY ERROR"); }
-        }
-
-        function exitSecretView() { 
-            secretView.classList.add('hidden'); 
-            galleryView.classList.remove('hidden'); 
-            osSwitcherPage2.classList.remove('hidden');
-            mainDockContainer.classList.remove('hidden');
-            triggerAnim(galleryView); 
-        }
-
-        function setFilter(cat, chip) {
-            if(chip) {
-                document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-            }
-            renderGrid('gallery-grid', imageLib[cat] || imageLib.All);
-        }
-
-        function toggleCornerPanel() {
-            const panel = document.getElementById('cornerSliderPanel');
-            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function updatePhotoCorners(val) {
-            document.documentElement.style.setProperty('--gallery-item-radius', `${val}px`);
-            document.getElementById('cornerValLabel').innerText = `${val}px`;
-        }
-
-        function toggleOSMenu() { osMenu.classList.toggle('hidden'); }
-        function toggleTheme() { isDarkMode = !isDarkMode; document.body.classList.toggle('dark-mode', isDarkMode); }
-        function openCustomizeModal() { customModal.style.display = 'flex'; }
-        function closeCustomizeModal() { customModal.style.display = 'none'; }
-        function logout() { location.reload(); }
-
-        // PRO ZOOM ENGINE
-        function openImageModal(url) { zoomedImage.src = url; imageModal.style.display = 'flex'; resetZoom(); }
-        function closeImageModal() { imageModal.style.display = 'none'; }
-        function resetZoom() { scale = 1; translateX = 0; translateY = 0; updateTransform(); }
-        function updateTransform() { zoomedImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`; }
-        function applyZoomBtn(f, e) { if(e) e.stopPropagation(); scale = Math.min(Math.max(1, scale * f), 12); updateTransform(); }
-        function downloadImage() { const a = document.createElement('a'); a.href = zoomedImage.src; a.download = "GHH_Photo.jpg"; a.click(); }
-
-        function refreshUserList() {
-            userListEl.innerHTML = '';
-            users.forEach(user => {
-                const btn = document.createElement('div');
-                btn.className = "user-bubble shadow-sm";
-                btn.innerText = user.u.toUpperCase();
-                btn.onclick = () => { 
-                    document.getElementById('username').value = user.u; 
-                    document.querySelectorAll('.user-bubble').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                };
-                userListEl.appendChild(btn);
-            });
-        }
-
-        function addUser() {
-            const u = document.getElementById('newUsernameInput').value, p = document.getElementById('newPasswordInput').value;
-            if(u && p) {
-                users.push({u, p}); localStorage.setItem('ghh_users', JSON.stringify(users));
-                refreshUserList(); alert("User Added.");
-            }
-        }
-
-        function saveSystem() {
-            const h = document.getElementById('newHeadingInput').value;
-            if(h) { document.getElementById('mainHeading').innerText = h; localStorage.setItem('ghh_title', h); }
-            closeCustomizeModal();
-        }
-
-        setInterval(() => {
-            const now = new Date();
-            const time = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-            document.getElementById('os-time-small').innerText = time;
-            document.getElementById('os-widget-clock').innerText = time;
-        }, 1000);
-
-        window.onload = () => { 
-            const savedT = localStorage.getItem('ghh_title'); if(savedT) document.getElementById('mainHeading').innerText = savedT;
-            refreshUserList(); 
-            initCategoryBar(); 
-            triggerAnim(loginView);
-        };
-    </script>
-</body>
-</html>
+        const zoom
