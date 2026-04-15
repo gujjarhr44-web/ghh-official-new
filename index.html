@@ -6,7 +6,7 @@
     <title>GHH@OFFICIAL - Ultimate OS Pro v34.5 Custom Photos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import7 url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         :root {
             --primary-accent: #3b82f6;
@@ -86,9 +86,9 @@
 
         #bootScreen { position: fixed; inset: 0; background: black; z-index: 100000; display: none; flex-direction: column; align-items: center; justify-content: center; color: white; }
         .boot-bar { width: 180px; height: 4px; background: #222; border-radius: 2px; margin-top: 25px; overflow: hidden; }
-        .boot-fill { height: 100%; background: var(--primary-accent); width: 0%; transition: 2.5s linear; }
+        .boot-fill { height: 100%; background: var(--primary-accent); width: 0%; transition: 8s linear; }
 
-        #imageModal { position: fixed; inset: 0; z-index: 15000; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; }
+        #imageModal { position: fixed; inset: 0; z-index: 30000; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; }
         #zoomedImage { max-width: 100%; max-height: 100%; transition: transform 0.1s linear; will-change: transform; pointer-events: auto; }
         .zoom-ui-overlay { position: fixed; bottom: 35px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 15005; pointer-events: auto; }
         .zoom-btn-circle { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); color: white; display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; backdrop-filter: blur(12px); }
@@ -98,10 +98,377 @@
         .category-chip.active { background: var(--primary-accent); color: white; border-color: transparent; }
         
         #osSwitcherPage2 { position: fixed; top: 85px; right: 16px; z-index: 9500; }
+
+        /* Vault Modal Styling */
+        .modal-overlay { position: fixed; inset: 0; z-index: 14000; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        
+        .anim-os { animation: fadeInScale 0.4s var(--anim-curve); }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        #bootScreen { 
+    pointer-events: auto !important; 
+    z-index: 100000;
+}
+
+#bootScreen a { 
+    pointer-events: auto !important; 
+    cursor: pointer;
+}
+/* लगभग Line 100 के पास पेस्ट करें */
+.slideshow-active { position: fixed; inset: 0; z-index: 20000; background: black; display: flex; align-items: center; justify-content: center; }
+.scan-percentage { font-family: monospace; color: var(--primary-accent); font-size: 20px; font-weight: 900; margin-top: 15px; }
+.search-container { padding: 10px 16px; margin-top: 10px; }
+.search-input { width: 100%; background: var(--glass-bg); border: 1.5px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 12px 20px; color: var(--text-color); outline: none; backdrop-filter: blur(10px); font-size: 14px; }
+/* Vault Lock & Timer Styles */
+.lock-screen { filter: grayscale(1) blur(5px); pointer-events: none; transition: 0.5s; }
+.cooldown-text { color: #ff4d4d; font-size: 12px; font-weight: 900; margin-top: 10px; display: none; }
+.vibrate-error { animation: shake 0.3s; }
+/* Favorite Heart Icon Style */
+.fav-btn { 
+    position: absolute; 
+    top: 8px; 
+    right: 8px; 
+    font-size: 16px; 
+    z-index: 10; 
+    transition: 0.3s;
+    filter: drop-shadow(0 0 3px rgba(0,0,0,0.5));
+}
+.fav-btn.active { color: #ff4d4d; transform: scale(1.2); }
+/* Vault Lock & Timer Styles */
+.lock-screen-blur { filter: grayscale(1) blur(15px); pointer-events: none; transition: 0.8s; }
+.vibrate-error { animation: vaultShake 0.3s; }
+@keyframes vaultShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+.cooldown-label { color: #ff3b30; font-size: 11px; font-weight: 900; margin-top: 12px; letter-spacing: 1px; }
+/* Line 114 के बाद और 115 से पहले ये पेस्ट करें */
+
+.fav-btn.active { color: #ff4d4d; transform: scale(1.2); }
+
+/* 👇 नया Face ID Percentage CSS 👇 */
+.scan-percentage { 
+    font-family: 'Courier New', monospace; 
+    color: var(--primary-accent); 
+    font-size: 24px; 
+    font-weight: 900; 
+    margin-top: 20px; 
+    text-shadow: 0 0 10px var(--neon-color);
+}
+/* 👆 यहाँ तक 👆 */
+/* Hidden Admin Panel Style */
+#adminPanel {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    flex-direction: column;
+    padding: 30px;
+    backdrop-filter: blur(20px);
+}
+.admin-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+body.os-nature { --primary-accent: #2ecc71; background: linear-gradient(to bottom, #134e5e, #71b280) !important; color: #f0fff0; }
+.leaf { position: absolute; width: 15px; height: 15px; background: #2ecc71; border-radius: 2px 15px 2px 15px; opacity: 0.6; animation: fall linear infinite; }
+@keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+.bird-animation { position: absolute; width: 4px; height: 4px; background: white; border-radius: 50%; animation: fly 15s infinite linear; opacity: 0.4; }
+@keyframes fly { from { left: -10%; top: 20%; } to { left: 110%; top: 10%; } }
+/* DJ Mode Power Pulse */
+@keyframes gurjarBass {
+    0% { transform: scale(1); filter: brightness(1) contrast(1); }
+    50% { transform: scale(1.15); filter: brightness(1.4) contrast(1.2); }
+    100% { transform: scale(1); filter: brightness(1) contrast(1); }
+}
+
+.dj-active .blob {
+    animation: gurjarBass 0.4s infinite alternate ease-in-out !important;
+    background: #ff0000 !important; /* बीट पर लाल रंग की चमक */
+}
+
+.dj-active .notch {
+    box-shadow: 0 0 30px #ff0000;
+    border: 2px solid white;
+}
+/* DJ Mode Pulse Animation */
+@keyframes gurjarBass {
+    0% { transform: scale(1); filter: brightness(1) blur(160px); }
+    50% { transform: scale(1.2); filter: brightness(1.5) blur(140px); }
+    100% { transform: scale(1); filter: brightness(1) blur(160px); }
+}
+.dj-active .blob { animation: gurjarBass 0.4s infinite alternate ease-in-out !important; background: #ff0000 !important; }
+.dj-active .notch { box-shadow: 0 0 30px #ff0000; border: 1px solid white; }
+
+/* 🔍 Zoom Modal Fix (ताकि एडमिन पैनल के ऊपर दिखे) */
+#imageModal { z-index: 30000 !important; }
+/* 🌟 World-First Holographic UI Styles */
+:root {
+    --aura-color: rgba(59, 130, 246, 0.5);
+}
+
+#mainBody {
+    perspective: 1200px; /* 3D गहराई के लिए */
+}
+
+/* ग्लास पैनल्स में 3D मूवमेंट */
+.glass-panel {
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* न्यूरल औरा (The Living Aura) */
+.neural-aura {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-accent);
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(15px);
+    box-shadow: 0 0 40px 20px var(--primary-accent);
+    opacity: 0;
+    z-index: 99999;
+    mix-blend-mode: screen;
+    transition: opacity 0.3s, transform 0.1s;
+}
+
+/* गाने के बेस पर UI का फटना (Aggressive Pulse) */
+.dj-active .glass-panel {
+    animation: holographicFlicker 0.2s infinite alternate;
+}
+
+@keyframes holographicFlicker {
+    0% { filter: brightness(1) contrast(1); }
+    100% { filter: brightness(1.3) contrast(1.1) drop-shadow(0 0 10px var(--primary-accent)); }
+}
+/* 🕵️ Ghost Shield - Anti-Spy Blur */
+.privacy-active {
+    filter: blur(25px) grayscale(1) brightness(0.5) !important;
+    transition: filter 0.4s ease;
+    pointer-events: none;
+}
+
+/* 🧊 Gravity Grid Physics */
+.gallery-item {
+    transition: transform 0.1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    will-change: transform;
+}
+
+/* 🧪 Neural Particle Line (Aura Connection) */
+#auraLine {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 99998;
+}
+/* 💓 OS Breathing Animation */
+@keyframes sentientBreath {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.005); filter: brightness(1.1); }
+}
+
+.living-os {
+    animation: sentientBreath 4s infinite ease-in-out;
+}
+
+/* 💠 Quantum Shatter Overlay */
+#shatterCanvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100000;
+}
+
+/* ⚡ Hyper-Touch Response */
+.touch-pulse {
+    animation: heartRate 0.4s ease-out !important;
+}
+
+@keyframes heartRate {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); filter: saturate(2); }
+    100% { transform: scale(1); }
+}
+/* 🧬 Bio-Luminescent Trail Style */
+.trail-particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: var(--primary-accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100001;
+    box-shadow: 0 0 15px var(--primary-accent);
+    transition: opacity 0.8s, transform 0.8s;
+}
+
+/* 💠 Magnetic Dock Animation */
+.dock-item {
+    transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* 🎤 Voice Command Visualizer */
+#voiceOverlay {
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(15px);
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: 1px solid var(--primary-accent);
+    color: white;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    z-index: 110000;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown { from { top: -50px; } to { top: 50px; } }
+/* 🌊 3D Depth Perspective */
+#mainBody {
+    perspective: 2000px;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gallery-item {
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* 🎙️ Voice Notification Style */
+.voice-toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-accent);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    z-index: 120000;
+    box-shadow: 0 0 20px var(--primary-accent);
+    display: none;
+    animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popUp { from { bottom: 50px; opacity: 0; } to { bottom: 100px; opacity: 1; } }
+/* ⚡ Kinetic Energy Bar */
+#energyContainer {
+    position: fixed;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 150px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 100002;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+#energyFill {
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(to top, #3b82f6, #00ff41);
+    box-shadow: 0 0 15px #00ff41;
+    transition: height 0.3s ease;
+}
+
+/* 🔥 Supernova Mode Visuals */
+.supernova-active {
+    animation: supernovaGlow 0.5s infinite alternate !important;
+}
+
+@keyframes supernovaGlow {
+    from { filter: saturate(1) contrast(1) brightness(1); }
+    to { filter: saturate(2) contrast(1.2) brightness(1.3); box-shadow: inset 0 0 100px var(--primary-accent); }
+}
+
+/* 🌡️ Heatmap Canvas */
+#heatmapCanvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99997;
+    opacity: 0.6;
+}
+/* 🪞 Liquid Mirror Effect */
+#mirrorLayer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.15; /* हल्का औरा देने के लिए */
+    filter: blur(40px) saturate(2);
+    transform: scaleX(-1); /* शीशे की तरह उल्टा करने के लिए */
+    pointer-events: none;
+}
+
+/* ⚡ Bass Shockwave (Strobe) */
+.bass-flash {
+    animation: strobeEffect 0.1s ease-out;
+}
+
+@keyframes strobeEffect {
+    0% { background: white; opacity: 1; }
+    100% { background: transparent; opacity: 0; }
+}
+
+#strobeOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 150000;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+</style>
     </style>
 </head>
-<body id="mainBody" class="os-origin">
+<video id="mirrorLayer" autoplay playsinline muted></video>
+<div id="strobeOverlay"></div>
+<div id="energyContainer">
+    <div id="energyFill"></div>
+</div>
+<canvas id="heatmapCanvas"></canvas>
+<div id="voiceOverlay">🎤 LISTENING FOR COMMAND...</div>
+<canvas id="shatterCanvas"></canvas>
+<div id="voiceToast" class="voice-toast">🔊 SYSTEM UPDATED</div>
 
+<div id="ghostAlert" class="fixed inset-0 flex items-center justify-center z-[100000] hidden pointer-events-none">
+    <div class="bg-red-600/20 backdrop-blur-md px-6 py-3 rounded-full border border-red-500/50">
+        <p class="text-red-500 font-black text-xs tracking-[0.3em] animate-pulse">🕵️ ANTI-PEEP ACTIVE</p>
+    </div>
+</div>
+<canvas id="auraLine"></canvas>
+<body id="mainBody" class="os-origin">
+    <div id="userAura" class="neural-aura"></div>
+
+    <audio id="bootSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
+    <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+    <audio id="unlockSound" src="https://assets.mixkit.co/active_storage/sfx/2530/2530-preview.mp3" preload="auto"></audio>
+    <audio id="errorSound" src="https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3" preload="auto"></audio>
+    
+    <audio id="natureMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop preload="auto"></audio>
+    <div id="youtubePlayer" style="display:none"></div>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<div class="dock-item" id="djBtn" onclick="toggleDJMode()">🎧</div>
+    <div id="natureLiveLayer" class="fixed inset-0 pointer-events-none z-0 hidden">
+        <div class="bird-animation"></div>
+        <div id="leafContainer"></div>
+    </div>
     <div class="liquid-bg" id="wallpaperLayer">
         <div class="blob" style="top:-10%; left:-10%;"></div>
         <div class="blob" style="bottom:-10%; right:20%;"></div>
@@ -125,13 +492,12 @@
         <div class="btn-circle shadow-lg" id="switcherBtn" onclick="toggleOSMenu()">💠</div>
     </div>
 
-    <!-- Page 2 Switcher -->
-    <div id="osSwitcherPage2" class="hidden">
+    <div id="osSwitcherPage2" class="hidden" style="position: fixed; top: 85px; right: 16px; z-index: 9500;">
         <div class="btn-circle shadow-lg" onclick="toggleOSMenu()">💠</div>
     </div>
 
     <!-- OS Selection Menu -->
-    <div id="osMenu" class="fixed top-[140px] right-[16px] z-[10000] hidden flex flex-col gap-2">
+    <div id="osMenu" class="fixed top-[140px] right-[16px] z-[12000] hidden flex flex-col gap-2">
         <div class="glass-panel p-2 flex flex-col gap-1 w-48 shadow-2xl overflow-y-auto max-h-[70vh]">
             <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('ios')">iOS </div>
             <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('origin')">OriginOS ◌</div>
@@ -141,16 +507,38 @@
             <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('oxygen')">OxygenOS ⚡</div>
             <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('pixel')">Pixel UI 💎</div>
             <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('hyper')">HyperOS ✧</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('rog')">ROG UI 👺</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('gaming')">Extreme Gaming 🎮</div>
+           <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('rog')">ROG UI 👺</div>
+<div class="px-4 py-3 hover:bg-green-500/20 cursor-pointer text-[10px] font-black rounded-xl text-green-500 border border-green-500/20" onclick="setOS('nature')">NatureOS 🌿</div>
+<div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('gaming')">Extreme Gaming 🎮</div>
         </div>
     </div>
 
     <!-- BOOT SCREEN -->
-    <div id="bootScreen" style="display: none;">
-        <h2 class="text-[10px] font-black tracking-[0.5em] uppercase opacity-80">Initializing Secure System</h2>
-        <div class="boot-bar"><div class="boot-fill" id="bootProgress"></div></div>
+    <div id="bootScreen" class="text-center px-4">
+    <h2 class="text-[15px] font-black tracking-wider uppercase mb-5 italic text-blue-400">
+        Contact us for build your own website
+    </h2>
+    
+    <div class="flex flex-col gap-3 mb-8 items-center">
+        <a href="https://wa.me/917027839683" target="_blank" style="pointer-events: auto;" class="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-3 rounded-2xl w-full max-w-[280px] active:scale-95 transition-transform">
+            <span class="text-[10px] font-black text-green-500">WHATSAPP:</span>
+            <span class="text-[11px] font-medium tracking-widest text-white/80">+91 7027839683</span>
+        </a>
+        
+        <a href="https://instagram.com/gautam.gurjar.712" target="_blank" style="pointer-events: auto;" class="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-3 rounded-2xl w-full max-w-[280px] active:scale-95 transition-transform">
+            <span class="text-[10px] font-black text-pink-500">INSTAGRAM:</span>
+            <span class="text-[11px] font-medium text-white/80">@gautam.gurjar.712</span>
+        </a>
+        
+        <a href="https://t.me/Gautam_GUJJAR" target="_blank" style="pointer-events: auto;" class="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-3 rounded-2xl w-full max-w-[280px] active:scale-95 transition-transform">
+            <span class="text-[10px] font-black text-blue-500">TELEGRAM:</span>
+            <span class="text-[11px] font-medium text-white/80">@Gautam_GUJJAR</span>
+        </a>
     </div>
+
+    <div class="boot-bar"><div class="boot-fill" id="bootProgress"></div></div>
+    <p class="text-[8px] mt-4 opacity-30 tracking-[0.4em] uppercase italic">Click to connect while booting...</p>
+</div>
 
     <!-- VIEW 1: LOGIN -->
     <div id="loginView" class="view-container active flex flex-col items-center justify-center px-6 anim-os">
@@ -172,27 +560,51 @@
     <!-- VIEW 2: GALLERY -->
     <div id="galleryView" class="view-container hidden anim-os">
         <div class="sticky-header">
-            <div class="flex justify-between items-end mb-4">
+            <div class="search-container">
+                <input type="text" id="gallerySearch" placeholder="Search photos..." class="search-input" oninput="handleSearch(this.value)">
+            </div>
+            
+            <div class="flex justify-between items-end mb-4 px-4">
                 <div>
                     <h1 id="galleryTitle" class="text-3xl font-black uppercase leading-none">Vault</h1>
                     <p class="text-[8px] font-black opacity-50 uppercase mt-1 tracking-widest">Authenticated</p>
                 </div>
-                <button onclick="startFaceID()" class="os-btn !bg-black px-4 py-2 text-[10px] w-auto border border-white/20 active:scale-90">
-                    Private Vault 🔒
-                </button>
+                <div class="flex gap-2">
+                    <button onclick="startSlideshow()" class="btn-circle !w-10 !h-10 text-sm">▶️</button>
+                    <button onclick="startFaceID()" class="os-btn !bg-black px-4 py-2 text-[10px] w-auto border border-white/20 active:scale-90">
+                        Private Vault 🔒
+                    </button>
+                </div>
             </div>
+            <div class="px-4 mt-4" id="storageDashboard">
+                <div class="glass-panel p-4 flex justify-between items-center border border-white/5">
+                    <div>
+                        <p class="text-[9px] font-black opacity-40 uppercase">OS Storage Status</p>
+                        <h4 class="text-sm font-black text-blue-400" id="photoCountText">Loading Stats...</h4>
+                    </div>
+                    <div class="text-right">
+                        <div class="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                            <div class="bg-blue-500 h-full w-[65%]"></div>
+                        </div>
+                        <p class="text-[8px] mt-1 opacity-50 font-bold uppercase">65% Used</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide" id="categoryBar"></div>
         </div>
+        
         <div class="grid grid-cols-2 gap-3 px-4 py-6 gallery-grid" id="gallery-grid"></div>
     </div>
 
-    <!-- VIEW 3: SECRET -->
-    <div id="secretView" class="view-container hidden anim-os">
-        <div class="px-6 py-10 flex justify-between items-center mb-4">
-            <button onclick="exitSecretView()" class="glass-panel w-10 h-10 flex items-center justify-center font-black">&lt;</button>
-            <h1 class="text-2xl font-black uppercase flex-1 text-center" style="color: var(--primary-accent);">Secret Library</h1>
+    <!-- VIEW 3: SECRET (Fixed Display) -->
+    <div id="secretView" class="view-container hidden anim-os" style="background: var(--bg-solid); z-index: 13000;">
+        <div class="sticky-header flex justify-between items-center bg-inherit">
+             <button onclick="exitSecretView()" class="btn-circle !w-10 !h-10 text-sm">✕</button>
+             <h1 class="text-xl font-black uppercase tracking-tighter" style="color: var(--primary-accent);">Secret Library</h1>
+             <div class="w-10"></div>
         </div>
-        <div class="grid grid-cols-2 gap-3 px-4 pb-24 gallery-grid" id="secret-grid"></div>
+        <div class="grid grid-cols-2 gap-3 px-4 py-6 gallery-grid" id="secret-grid"></div>
     </div>
 
     <!-- NAVIGATION DOCK -->
@@ -203,15 +615,16 @@
             <p id="cornerValLabel" class="text-[11px] font-bold mt-2 text-center text-blue-500">36px</p>
         </div>
         <div class="dynamic-dock shadow-2xl">
-            <div class="dock-item" onclick="setFilter('All', null)">🏠</div>
+            <div class="dock-item" onclick="setFilter('JODHPUR', null)">🏠</div>
             <div class="dock-item" onclick="toggleCornerPanel()">📐</div>
             <div class="dock-item" onclick="toggleTheme()">🌓</div>
+            <div class="dock-item" id="djBtn" onclick="toggleDJMode()" title="Gurjar DJ Mode">🎧</div>
             <div class="dock-item" onclick="logout()">🚪</div>
         </div>
     </div>
 
     <!-- MODALS -->
-    <div id="vaultModal" class="modal-overlay" style="display: none;" onclick="hideVaultModal()">
+    <div id="vaultModal" class="modal-overlay" onclick="hideVaultModal()">
         <div class="glass-panel p-10 w-full max-w-[340px] text-center" onclick="event.stopPropagation()">
             <div class="text-5xl mb-4">🛡️</div>
             <h3 class="text-lg font-black uppercase mb-6 italic tracking-wider">Protocol Cipher</h3>
@@ -223,23 +636,31 @@
         </div>
     </div>
 
-    <div id="faceIDOverlay" style="display: none;">
+    <div id="faceIDOverlay">
         <div class="scanner-frame"><div class="scan-line"></div></div>
-        <p class="text-white font-black mt-8 uppercase tracking-[0.2em]">Bio-Metric Decrypting...</p>
+        <div id="faceScanPercent" class="scan-percentage">0%</div>
+        <p class="text-white font-black mt-6 uppercase tracking-[0.2em] text-[10px] opacity-70">Detecting Identity...</p>
     </div>
 
-    <div id="imageModal" onclick="closeImageModal()" style="display: none;">
-        <div class="zoom-ui-overlay">
-            <div class="zoom-btn-circle" onclick="applyZoomBtn(1.6, event)">+</div>
-            <div class="zoom-btn-circle" onclick="applyZoomBtn(0.6, event)">−</div>
-            <div class="zoom-btn-circle" onclick="downloadImage(event)">💾</div>
-            <div class="zoom-btn-circle" onclick="resetZoom(event)">↺</div>
-            <div class="zoom-btn-circle" onclick="closeImageModal()">✕</div>
-        </div>
-        <img id="zoomedImage" src="" alt="Zoomed" onclick="event.stopPropagation()">
+   <div id="imageModal" onclick="closeImageModal()">
+    <div class="zoom-ui-overlay">
+        <div class="zoom-btn-circle" onclick="applyZoomBtn(1.6, event)">+</div>
+        <div class="zoom-btn-circle" onclick="applyZoomBtn(0.6, event)">−</div>
+        <div class="zoom-btn-circle" onclick="downloadImage(event)">💾</div>
+        <div class="zoom-btn-circle" onclick="resetZoom(event)">↺</div>
+        <div class="zoom-btn-circle" onclick="closeImageModal()">✕</div>
     </div>
 
-    <div id="customModal" class="modal-overlay" style="display: none;" onclick="closeCustomizeModal()">
+    <div id="infoPanel" class="absolute top-[80px] left-1/2 -translate-x-1/2 glass-panel p-3 text-[10px] text-white/70 font-bold hidden z-50 shadow-xl border border-white/10 rounded-xl" onclick="event.stopPropagation()">
+        <p>RESOLUTION: 800x800</p>
+        <p>SIZE: 256 KB</p>
+        <p>TAGS: #JODHPUR #GHH</p>
+    </div>
+
+    <img id="zoomedImage" src="" alt="Zoomed" onclick="event.stopPropagation()">
+</div>
+
+    <div id="customModal" class="modal-overlay" onclick="closeCustomizeModal()">
         <div class="glass-panel p-6 w-full max-w-[380px] m-4" onclick="event.stopPropagation()">
             <h3 class="text-xl font-black mb-6 text-center uppercase italic">OS Configuration</h3>
             <input type="text" id="newHeadingInput" placeholder="System Display Title" class="os-input mb-4">
@@ -254,183 +675,1158 @@
             </div>
 
             <div class="p-4 border border-dashed border-gray-300 rounded-2xl bg-white/5 mb-4">
-                <p class="text-[9px] font-black uppercase mb-2 opacity-60 text-center">Identity Management</p>
-                <input type="text" id="newUsernameInput" placeholder="New ID" class="os-input mb-2 text-sm">
-                <input type="password" id="newPasswordInput" placeholder="Key" class="os-input text-sm">
-                <div class="flex gap-2 mt-3">
-                    <button onclick="addUser()" class="os-btn flex-1 py-2 text-[10px]">ADD USER</button>
-                    <button onclick="clearUsers()" class="os-btn flex-1 py-2 text-[10px] !bg-red-500">RESET</button>
-                </div>
-            </div>
+    <p class="text-[9px] font-black uppercase mb-2 opacity-60 text-center">Identity Management</p>
+    <input type="text" id="newUsernameInput" placeholder="New ID" class="os-input mb-2 text-sm">
+    <input type="password" id="newPasswordInput" placeholder="Key" class="os-input text-sm">
+    <div class="mt-3">
+        <button onclick="addUser()" class="os-btn w-full py-2 text-[10px]">ADD USER</button>
+    </div>
+</div>
             <button onclick="saveSystem()" class="os-btn py-3 text-xs shadow-lg">Commit Updates</button>
         </div>
     </div>
 
     <div class="home-bar"></div>
 
+    <div id="adminPanel" class="anim-os">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-black text-red-500 italic uppercase">System Debug Mode</h2>
+            <button onclick="closeAdmin()" class="btn-circle">✕</button>
+        </div>
+
+        <div class="admin-card">
+            <p class="text-[10px] opacity-50 mb-3 uppercase font-bold text-orange-500">Security Override</p>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="clearBanList()" class="os-btn !bg-green-600 !py-2 text-[8px]">🟢 UNBAN ALL</button>
+                <button onclick="clearUsers()" class="os-btn !bg-orange-600 !py-2 text-[8px]">🟠 RESET USERS</button>
+                <button onclick="banUser(prompt('Enter ID to Ban:'))" class="os-btn !bg-red-600 !py-2 text-[8px]">🔴 BAN ID</button>
+                <button onclick="localStorage.clear(); location.reload();" class="os-btn !bg-red-800 !py-2 text-[8px]">💀 FACTORY RESET</button>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <p class="text-[10px] opacity-50 mb-3 uppercase font-bold text-green-500">Intruder & Access Logs</p>
+            <div id="log-list" class="max-h-[300px] overflow-y-auto bg-black/40 rounded-xl font-mono border border-white/5">
+                <p class="p-4 text-center opacity-30 text-[10px]">WAITING FOR LOG DATA...</p>
+            </div>
+            <button onclick="if(confirm('Clear history?')){localStorage.removeItem('ghh_login_logs'); refreshLoginHistory();}" 
+                    class="os-btn !bg-gray-800 mt-3 text-[8px] opacity-50">🗑️ WIPE LOGS</button>
+        </div>
+
+        <div class="admin-card">
+            <p class="text-[10px] opacity-50 mb-2 uppercase font-bold">Hardware Stats</p>
+            <div class="text-[11px] space-y-1 font-mono text-blue-400">
+                <p id="stat-users">Users: Loading...</p>
+                <p>OS Version: v34.5 Enterprise</p>
+                <p>Developer: GAUTAM GURJAR</p>
+            </div>
+        </div>
+    </div>
     <script>
         const imageModal = document.getElementById('imageModal');
-        const zoom    <div class="notch" id="dynamicNotch">GHH OS Stable</div>
+        const zoomedImage = document.getElementById('zoomedImage');
+        const loginView = document.getElementById('loginView');
+        const galleryView = document.getElementById('galleryView');
+        const secretView = document.getElementById('secretView');
+        const vaultModal = document.getElementById('vaultModal');
+        const faceIDOverlay = document.getElementById('faceIDOverlay');
+        const osMenu = document.getElementById('osMenu');
+        const customModal = document.getElementById('customModal');
+        const userListEl = document.getElementById('userList');
+        const categoryBar = document.getElementById('categoryBar');
+        const wallpaperLayer = document.getElementById('wallpaperLayer');
+        const mainDockContainer = document.getElementById('mainDockContainer');
+        const loginControls = document.getElementById('loginControls');
+        const osSwitcherPage2 = document.getElementById('osSwitcherPage2');
 
-    <div class="status-bar">
-        <div id="os-time-small">00:00</div>
-        <div class="flex items-center gap-2">
-            <span id="os-brand-logo">◌</span>
-            <div class="w-6 h-3 border border-black/20 rounded-sm p-[1px] flex items-center">
-                <div class="bg-green-500 h-full w-[88%]"></div>
-            </div>
-        </div>
-    </div>
+       const ADMIN_PW = 'Gujjar@5757';
+let logoClicks = 0;
+let clickTimer;
 
-    <!-- Page 1 Only Controls -->
-    <div class="top-controls" id="loginControls">
-        <div class="btn-action shadow-lg" id="custBtn" onclick="openCustomizeModal()">⚙️ Customize</div>
-        <div class="btn-circle shadow-lg" id="switcherBtn" onclick="toggleOSMenu()">💠</div>
-    </div>
+// --- गुर्जर डीजे और जासूसी के लिए नये वेरिएबल्स ---
+let player; 
+let vaultFails = 0;
 
-    <!-- Page 2 Switcher -->
-    <div id="osSwitcherPage2" class="hidden">
-        <div class="btn-circle shadow-lg" onclick="toggleOSMenu()">💠</div>
-    </div>
+// लोगो पर क्लिक करने का लॉजिक (इसे पेस्ट करें)
+document.getElementById('mainHeading').onclick = function() {
+    logoClicks++;
+    clearTimeout(clickTimer);
+    if (logoClicks === 5) {
+        openAdmin();
+        logoClicks = 0;
+    }
+    clickTimer = setTimeout(() => { logoClicks = 0; }, 2000);
+};
+        let currentOS = 'origin';
+        let isDarkMode = false;
+        
+        let scale = 1, translateX = 0, translateY = 0, isDragging = false, startX = 0, startY = 0;
+        let initialPinchDist = 0, lastScale = 1;
 
-    <!-- OS Selection Menu -->
-    <div id="osMenu" class="fixed top-[140px] right-[16px] z-[10000] hidden flex flex-col gap-2">
-        <div class="glass-panel p-2 flex flex-col gap-1 w-48 shadow-2xl overflow-y-auto max-h-[70vh]">
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('ios')">iOS </div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('origin')">OriginOS ◌</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('realme')">RealmeUI ◉</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('oneui')">One UI 🔵</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('nothing')">Nothing OS ⚪</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('oxygen')">OxygenOS ⚡</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('pixel')">Pixel UI 💎</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('hyper')">HyperOS ✧</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('rog')">ROG UI 👺</div>
-            <div class="px-4 py-3 hover:bg-white/10 cursor-pointer text-[10px] font-black rounded-xl" onclick="setOS('gaming')">Extreme Gaming 🎮</div>
-        </div>
-    </div>
+        const defaultUsers = [{u: 'Gautam', p: '5757'}, {u: 'Hemant', p: '5757'}, {u: 'Aman', p: '5757'}];
+        let users = JSON.parse(localStorage.getItem('ghh_users')) || defaultUsers;
 
-    <!-- BOOT SCREEN -->
-    <div id="bootScreen" style="display: none;">
-        <h2 class="text-[10px] font-black tracking-[0.5em] uppercase opacity-80">Initializing Secure System</h2>
-        <div class="boot-bar"><div class="boot-fill" id="bootProgress"></div></div>
-    </div>
+        function gen(count, seed) {
+            let res = [];
+            for(let i=0; i<count; i++) res.push(`https://picsum.photos/seed/${seed}_${i}/800/800`);
+            return res;
+        }
 
-    <!-- VIEW 1: LOGIN -->
-    <div id="loginView" class="view-container active flex flex-col items-center justify-center px-6 anim-os">
-        <div class="text-center mb-10 mt-20">
-            <div id="os-widget-clock" class="text-7xl font-black mb-1">00:00</div>
-            <h1 id="mainHeading" class="text-4xl font-black tracking-tighter italic" style="color: var(--primary-accent);">GHH<span class="opacity-30">@</span>OFFICIAL</h1>
-        </div>
-        <div class="glass-panel p-8 w-full max-w-[380px]">
-            <div class="space-y-5">
-                <p class="text-[9px] font-black uppercase opacity-40 ml-1">Identity Selection</p>
-                <div id="userList" class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide"></div>
-                <input type="text" id="username" class="os-input text-sm" placeholder="Enter Identity ID" autocomplete="off" value="">
-                <input type="password" id="password" class="os-input text-sm" placeholder="Enter Cipher Key" autocomplete="off" value="">
-                <button onclick="handleLoginWithBoot()" class="os-btn shadow-lg active:scale-95">Initialize</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- VIEW 2: GALLERY -->
-    <div id="galleryView" class="view-container hidden anim-os">
-        <div class="sticky-header">
-            <div class="flex justify-between items-end mb-4">
-                <div>
-                    <h1 id="galleryTitle" class="text-3xl font-black uppercase leading-none">Vault</h1>
-                    <p class="text-[8px] font-black opacity-50 uppercase mt-1 tracking-widest">Authenticated</p>
-                </div>
-                <button onclick="startFaceID()" class="os-btn !bg-black px-4 py-2 text-[10px] w-auto border border-white/20 active:scale-90">
-                    Private Vault 🔒
-                </button>
-            </div>
-            <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide" id="categoryBar"></div>
-        </div>
-        <div class="grid grid-cols-2 gap-3 px-4 py-6 gallery-grid" id="gallery-grid"></div>
-    </div>
-
-    <!-- VIEW 3: SECRET -->
-    <div id="secretView" class="view-container hidden anim-os">
-        <div class="px-6 py-10 flex justify-between items-center mb-4">
-            <button onclick="exitSecretView()" class="glass-panel w-10 h-10 flex items-center justify-center font-black">&lt;</button>
-            <h1 class="text-2xl font-black uppercase flex-1 text-center" style="color: var(--primary-accent);">Secret Library</h1>
-        </div>
-        <div class="grid grid-cols-2 gap-3 px-4 pb-24 gallery-grid" id="secret-grid"></div>
-    </div>
-
-    <!-- NAVIGATION DOCK -->
-    <div id="mainDockContainer" class="dynamic-dock-container hidden">
-        <div id="cornerSliderPanel" class="glass-panel shadow-2xl">
-            <p class="text-[10px] font-black uppercase mb-3 opacity-60 text-center">Photo Border Radius</p>
-            <input type="range" min="0" max="60" value="36" class="w-full h-1 bg-blue-200 rounded-lg appearance-none cursor-pointer" oninput="updatePhotoCorners(this.value)">
-            <p id="cornerValLabel" class="text-[11px] font-bold mt-2 text-center text-blue-500">36px</p>
-        </div>
-        <div class="dynamic-dock shadow-2xl">
-            <div class="dock-item" onclick="setFilter('All', null)">🏠</div>
-            <div class="dock-item" onclick="toggleCornerPanel()">📐</div>
-            <div class="dock-item" onclick="toggleTheme()">🌓</div>
-            <div class="dock-item" onclick="logout()">🚪</div>
-        </div>
-    </div>
-
-    <!-- MODALS -->
-    <div id="vaultModal" class="modal-overlay" style="display: none;" onclick="hideVaultModal()">
-        <div class="glass-panel p-10 w-full max-w-[340px] text-center" onclick="event.stopPropagation()">
-            <div class="text-5xl mb-4">🛡️</div>
-            <h3 class="text-lg font-black uppercase mb-6 italic tracking-wider">Protocol Cipher</h3>
-            <input type="password" id="vaultPassword" class="os-input text-center text-xl tracking-[0.5em]" placeholder="••••">
-            <div class="flex gap-3 mt-6">
-                <button onclick="unlockVault()" class="os-btn flex-1 py-3 text-[10px]">UNLOCK</button>
-                <button onclick="hideVaultModal()" class="glass-panel flex-1 py-3 text-[10px] border border-black/10">CANCEL</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="faceIDOverlay" style="display: none;">
-        <div class="scanner-frame"><div class="scan-line"></div></div>
-        <p class="text-white font-black mt-8 uppercase tracking-[0.2em]">Bio-Metric Decrypting...</p>
-    </div>
-
-    <div id="imageModal" onclick="closeImageModal()" style="display: none;">
-        <div class="zoom-ui-overlay">
-            <div class="zoom-btn-circle" onclick="applyZoomBtn(1.6, event)">+</div>
-            <div class="zoom-btn-circle" onclick="applyZoomBtn(0.6, event)">−</div>
-            <div class="zoom-btn-circle" onclick="downloadImage(event)">💾</div>
-            <div class="zoom-btn-circle" onclick="resetZoom(event)">↺</div>
-            <div class="zoom-btn-circle" onclick="closeImageModal()">✕</div>
-        </div>
-        <img id="zoomedImage" src="" alt="Zoomed" onclick="event.stopPropagation()">
-    </div>
-
-    <div id="customModal" class="modal-overlay" style="display: none;" onclick="closeCustomizeModal()">
-        <div class="glass-panel p-6 w-full max-w-[380px] m-4" onclick="event.stopPropagation()">
-            <h3 class="text-xl font-black mb-6 text-center uppercase italic">OS Configuration</h3>
-            <input type="text" id="newHeadingInput" placeholder="System Display Title" class="os-input mb-4">
+        const imageLib = {
+                JODHPUR: ["https://lh3.googleusercontent.com/pw/AP1GczMTZZMB_rziHj5IKn6GPwYxTiVIK75jqpAXp_G2i0bTLRQQeaKcFYxLGN2FMvGce_GeknW0mRKjhMS4K71GKUf8m2cP9WrBRvPQoqXS87SiigUljpk2=w2400", 
+                "https://lh3.googleusercontent.com/pw/AP1GczNJjU-_D7Td_GqOh60V4ZmOtCw2GEcl7GR9veVX27pWH1opYJ7p6SOPzOPXJfG9YNJvpu2UBrjj7INvk-qiRJsRElVe05NDJNOfDVAKW1YH3V_ZTZcx=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczN1GjWQ_gd5JAnJ4YUij76LtONCRx-kKQrGEbMSRZKMzX3uFT0DajnqjVOaWx1PLtsM43_LdsYMgfvNZNF46_HxgpyP5jSV8wAmmiGXPQcTLVlZPQTr=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPcoTtY-eKZxZ0AQKKxyPNc6EHJ5dQlkNkSS2leE0rTtpwntsGJiGhJvZ2K6BVhF50rAODUYo0wijg2aEJnzF5C88EoflmrdqtlO7PcFHr_0Da8FDJj=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczNRhCYX1r6H19PjCJ_z1TCqbshGI7s-Gxs7i3oMmzbJFXpcE1GUSbtI7IfLhxomrt35j0zkIVVM5L952p93SgOL2DaKCEQFh290axOTEsfQFC5OO1Lb=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczNqT9xWWbZDYjAR6lVHVddB0ZgXcbLhnXKVo92NDj6NeA4SFgH40qc6IlJd4xXVNnlPwK6Urj43Kcfp1CWaLjPTOzu8AVksA_G9ZMbTQfcu4WO2COxg=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczP3eh9cdSSmXWOz2-DryWIaWOZ0AkzwhwzTe9Cl3l-FxHEhsRFB682t42uzhoinmRHf3iGBy3uYtxLG5KqWkR6gN_APkljGYDb3fw1TRUsStr_fJkuN=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczOacISJX81AvJjUqli-HZ0nsXxGm3-6U_a2NXrx770dml9odyOIsuSSu1SZ2RKyIcRPXA3Ie2uvVhwItLXF2aL5LXZcNxaqsfn37gDXEsLrjyf3CIWu=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczO65BBqtekoI_lE_wvu6kWSa5Gkjk7BuKHFD_LjYdWtAQQr7ieTmvYHMGpRr6bDa5yx8EYTK0NdXrg8I0UQab-_4CSe--sLQHEFZb2Y59BNCyI11gcu=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPuXzl9wKYxUSAFwkTvOkRut96FZG4o88_f_CDWodEssPccimR4Ni7UoKpfchV0nHIENqyoVxC0ehV4Ix91pbkgVWYrV5OtHz9-KJJuqO-acYIJpKuW=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPI_xgE4-J_hwNhocI-LPJ1Ye9N8i_X9S_vP6hu9f_VUGIm9idBDAem3HyoyyJ-ZNXCEd6Qv2-JGi_FG-EiokoQC5hq8vktZNE1zy5sEGUbhg9CZOsU=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczMFZSnzdJ_C3iRq7iyG6vjlYnKcBTkse-9Lim2AuLyDEB9o3ayy45KykwVbI3zYBI6fOhyLbS7IsUhtuFm7KxUUQH4MYS0hOuTE7Y8ee8Ukv2q29yBM=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczMdWFCEgyR1OyNbxM1QmLoEZBRphr-rbMA_a8zP2h25PAFt2P0Q1e0eOXhTW4m1Zr6vKk9Izjc3t4yJjWlNa2wcdbwiqcXMuYGJ6QKc2RpNTOrEMkoC=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczNvfjAXYGaQdJQRVPZBoh7RSOfiXsh-NF2OjjjXeTov-OjnvLfbym8Vp9YapfqqdDLj5HElKQdt99_sjtEc4ihKpmh-FQsb_l9_mKZ5_rDlNRgcKJUd=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczMv7jnvJAZd_JJHgbgZ8mFSPwDpAZNiC3e_tMIrxFuAu-qSa3Xs0yoj716wSMwF446zS6nzR_vjaCoGL21BhAydEoVNi3IXV6DxX2QQVmNGLC1dqODX=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczNlh26PUJyhUFSIfXsmUDAaXkb6xGH1iXUjTpGmdnCKdTFkTDGwZ172f6kvs9GsMqNuz7qIye_x4NFmnD1aIq-czJTUwlkuQlTViMstdzkDopEwzCAB=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczMOlZcA-uN6V-90-QKjfB_1XtVe_b9f3hAPz_9zwheBDXSZD6q0JAK8lr4rxoMGGw3f36rYYynSWoJKoOdarFIhMZCz03ysq4YmvTjSEjsk9RVvOCRV=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczOxEAD3mnVd0Mpt9F8O7iRQf0flgtqX3pUX3jM7Cfj-IkSmWkHi-hwgHOO76xF2jYVAJSylTdb01jnPB5i4udTSeZ5dl5lIecq0sTdS01rse272HntL=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPKLR07Qrp_87_8zi4ukjCj5KiBMsqEntIrZorYa3xoScv09UxbGwbxD0Ep3e1xc7GXUd9vAzPbjk0Yq2ZwmPu0Sv5xjG4vh3ptilnjhwG8dWfAsT9i=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczOt8wdK2me7-JNpN3_7KixTILrEqatYg19TXvLi-lr1d44u03RCHiK3iW8UOuvODfMHTlWi5i-Hgtu67hjlXTphUTW-nXk6RJtOAjrf9rCgcaGxrbak=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczOKK6_06ax62t5T18Wp6ZVjVmgzZdpOU4U1FUwkdUnzMTzqh3td_YJUg-YV40kAvgk6fuHwO_6AYXb1greNdTfzS9eyOyKJ1lRCs8TJ17TPsDzrQyrT=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPY4QNaF3Hi_GkAuvdd-50bNUg5myrko2bNE9ZB3swtAy4WcPl6UThFQZrARIfEMhvYazOVnLUzdPT8dpimLTDux0eHHKCIK6bDL8hxKq2KSxu-2eEP=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczP6IhNXF0WednDrICsTirjmJ2qnwV_fJcI3h_G-sFWZN_Wal0UZrjMEoMKaQMroVL8fg0e3JmKTOfcBUWc8b0ruINKiZ25aXOHH0KA3wQIvS2UhtbnV=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPe4d1yJLGTSD06RgTNp9DkV_4pkvCAn1lpygaSPcDnVz-JxEpOrHj30B3yMml7Lb3aFAc83fHSPCqcIvAitwfmR072eVcwqhnl55pWcVKUO2S7lqoJ=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczNhj8hWQGvYYfaqlf-LYGMD0TL0ThfwDjcj_dN_V_s-goxLogWB6w1ax7SYGnKe9wZOCwPq7eNcnwSz-mr30BHcu6g-bSdU8-5yUB0Y0iHCX7qz-Sj4=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczP2n7pk1E225vFv9VMs2rb2H6Q06GUhH4WNwf_OaE5ew1QGapt_xeSj2YQozi7fbklKijszXehXRVg-SNZGSjhuM0QzIxB2fkMz1sEkK_zsGsCqBEsC=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczP2n7pk1E225vFv9VMs2rb2H6Q06GUhH4WNwf_OaE5ew1QGapt_xeSj2YQozi7fbklKijszXehXRVg-SNZGSjhuM0QzIxB2fkMz1sEkK_zsGsCqBEsC=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczNImNpB7-mDDrgUuaOwX1Ag-gcTcYYuCgLjEUHjqCOVo0dOwSIxgoFeTvUy9O1wuDHFEFZnfZhlM7spVKqmm0SsXjFRCugcrsvwzAXQiO5MOFusdcQA=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczO-GjjxCR2st-ovaPz73ElRBMrnxVUqPrFQVlYgs9nG8-odsmCy3RHtJjljtNRoFuH3V6uaF14a8714MpCSJ0bdoBFzlb_oikKYl5HgRwM5MZims4XW=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPEONKFlh5wMGO2dApt8_QcUKDJlCW9b7Wn1jABIa0kUwh5pO__bF-8xkouaXngA9jhLJGEPnvTpMMiO7Rd-Bsm68A6-1HduFrRgXE_NzTbl_JxySwv=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczNKfiV_MUILLNw_j21xFeHOzP9a6CjmOJaPsq7St67FDkT74qvfl63NJXiulkkORH6AEAJO_VrT7u2QO7druzNsClkjmjkQPTlpOamjL01AEpS4M-n0=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczM7Jxb0ZHXmANYMosMl2nVwlvy3LiwnZd86oF9TKsl3MxTj91F17NsgMlDIrcAPlM3FVyN3uZAFv_4hH-warywFdHM-El7VrlOv9KrjYwm0QL5udL02=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPPeuGsBq4_FNTevAg8-sEI-oG5PUsGFDuCGMp6bNZXH-sen09LKPuTdXL_Pbnm73_sTJociq1VJ6kWhjRZ-9TrCKZ2UcQhQmWHk_h6J63TxnlcpkRu=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczPwIKTdEq0uQqHBXI5KLL5IuvL50c85MK0CsC4JWjnSKKbKLe4NnWOwZrHY0XBOe7IHQ4xncRPW1AeSxVDfA6r_o7-K2bcAdYJX6k4TbeKJTF7lF1-E=w2400",
+                "https://lh3.googleusercontent.com/pw/AP1GczMg3loBB198rBI0ouLdJuMbgImDAwoUSXO7tFyNjuJ5fQTFpMYovUWsHy1No84PXlUVV887dGxyz-uU0Gbq8JUQdqaudyZ5uMN9Q5Q68wTqmmSWciuX=w2400" ],
             
-            <div class="p-3 border border-black/10 rounded-xl mb-4">
-                <p class="text-[9px] font-black uppercase mb-2 opacity-50 text-center">Background System</p>
-                <div class="flex gap-2">
-                    <button onclick="setWallpaper('liquid')" class="flex-1 py-1.5 text-[9px] border border-black/20 rounded-lg">Liquid</button>
-                    <button onclick="setWallpaper('midnight')" class="flex-1 py-1.5 text-[9px] border border-black/20 rounded-lg">Midnight</button>
-                    <button onclick="setWallpaper('solid')" class="flex-1 py-1.5 text-[9px] border border-black/20 rounded-lg">Solid</button>
+
+
+            People: gen(20, 'ppl'),
+            Documents: gen(15, 'docs'),
+            "Sec 1": gen(10, 's1'),
+            "Sec 2": gen(10, 's2'),
+            "Sec 3": gen(10, 's3'),
+            "Sec 4": gen(10, 's4'),
+            "Sec 5": gen(10, 's5')
+        };
+
+        const secretPics = gen(20, 'top_secret_v34'); 
+
+        function initCategoryBar() {
+            categoryBar.innerHTML = '';
+            Object.keys(imageLib).forEach((cat, idx) => {
+                const chip = document.createElement('div');
+                chip.className = `category-chip ${idx === 0 ? 'active' : ''}`;
+                chip.innerText = cat;
+                chip.onclick = () => setFilter(cat, chip);
+                categoryBar.appendChild(chip);
+            });
+        }
+
+        function toggleCornerPanel() {
+            const panel = document.getElementById('cornerSliderPanel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+        function updatePhotoCorners(val) {
+            document.documentElement.style.setProperty('--gallery-item-radius', `${val}px`);
+            document.getElementById('cornerValLabel').innerText = `${val}px`;
+        }
+
+        // जासूसी डेटा रिकॉर्ड होने का इंतज़ार करने वाला नया लॉगिन फंक्शन
+async function handleLoginWithBoot() {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+    const valid = users.find(user => user.u === u && user.p === p);
+
+    if (valid) {
+        const bannedUsers = JSON.parse(localStorage.getItem('banned_users')) || [];
+        if (bannedUsers.includes(u)) {
+            if(document.getElementById('errorSound')) document.getElementById('errorSound').play();
+            alert("🚨 ACCESS DENIED: BANNED!"); return;
+        }
+
+        await captureLoginInfo(u); 
+
+        if(document.getElementById('bootSound')) document.getElementById('bootSound').play();
+        if (navigator.vibrate) navigator.vibrate(100); 
+        document.getElementById('bootScreen').style.display = 'flex';
+        setTimeout(() => document.getElementById('bootProgress').style.width = '100%', 50);
+        
+        setTimeout(() => {
+            document.getElementById('bootScreen').style.display = 'none';
+            
+            // --- ये बदलाव यहाँ किए गए हैं ---
+            loginView.classList.add('hidden');
+            loginControls.classList.add('hidden'); // कस्टमाइज बटन छुपा दिया
+            osSwitcherPage2.classList.remove('hidden'); // केवल OS स्विच आइकन दिखेगा
+            // -----------------------------
+
+            galleryView.classList.remove('hidden');
+            mainDockContainer.classList.remove('hidden');
+            renderGrid('gallery-grid', imageLib.JODHPUR);
+        }, 8200);
+    } else { 
+        if(document.getElementById('errorSound')) document.getElementById('errorSound').play(); 
+    }
+}
+
+        function setOS(os) {
+    currentOS = os;
+    document.body.className = `os-${os}` + (isDarkMode ? ' dark-mode' : '');
+    
+    const logos = {ios:'', origin:'◌', nature:'🌿', realme:'◉', hyper:'✧', gaming:'🎮', oxygen:'⚡', oneui:'🔵', nothing:'⚪', pixel:'💎', rog:'👺'};
+    const logoEl = document.getElementById('os-brand-logo');
+    if(logoEl) logoEl.innerText = logos[os] || '◌';
+
+    const natureLayer = document.getElementById('natureLiveLayer');
+    const natureMusic = document.getElementById('natureMusic');
+
+    if (os === 'nature') {
+        if(natureLayer) natureLayer.classList.remove('hidden');
+        if(natureMusic) natureMusic.play().catch(() => {});
+        if(typeof startLeaves === 'function') startLeaves();
+    } else {
+        if(natureLayer) natureLayer.classList.add('hidden');
+        if(natureMusic) { natureMusic.pause(); natureMusic.currentTime = 0; }
+    }
+
+    if(osMenu) osMenu.classList.add('hidden');
+    const active = [loginView, galleryView, secretView].find(v => v && !v.classList.contains('hidden'));
+    if(active) triggerAnim(active);
+}
+
+        function triggerAnim(el) {
+            if(!el) return;
+            el.classList.remove('anim-os');
+            void el.offsetWidth;
+            el.classList.add('anim-os');
+        }
+
+        function setWallpaper(type) {
+            wallpaperLayer.innerHTML = '';
+            wallpaperLayer.style.background = 'none';
+            if(type === 'liquid') {
+                wallpaperLayer.innerHTML = '<div class="blob" style="top:-10%; left:-10%;"></div><div class="blob" style="bottom:-10%; right:20%;"></div>';
+            } else if(type === 'midnight') {
+                wallpaperLayer.style.background = 'radial-gradient(circle at center, #1a1a2e 0%, #16213e 100%)';
+            } else { wallpaperLayer.style.background = isDarkMode ? '#0a0a0a' : '#ffffff'; }
+        }
+
+        function refreshUserList() {
+            userListEl.innerHTML = '';
+            users.forEach(user => {
+                const btn = document.createElement('div');
+                btn.className = "user-bubble shadow-sm";
+                btn.innerText = user.u.toUpperCase();
+                btn.onclick = () => { 
+                    document.getElementById('username').value = user.u; 
+                    document.querySelectorAll('.user-bubble').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                };
+                userListEl.appendChild(btn);
+            });
+        }
+
+        function renderGrid(containerId, images) {
+            const grid = document.getElementById(containerId);
+            if(!grid) return;
+            grid.innerHTML = '';
+           images.forEach(url => {
+                const isFav = favorites.includes(url); // चेक करें कि क्या यह पहले से फेवरेट है
+                const div = document.createElement('div');
+                div.className = `gallery-item glass-panel relative`;
+                div.innerHTML = `
+                    <div class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${url}', event)">
+                        ${isFav ? '❤️' : '🤍'}
+                    </div>
+                    <img src="${url}" class="w-full h-full object-cover" loading="lazy" onclick="openImageModal('${url}')">
+                `;
+                grid.appendChild(div);
+            });
+
+// डैशबोर्ड पर फोटो की संख्या अपडेट करने के लिए
+const count = images.length;
+const photoText = document.getElementById('photoCountText');
+if(photoText) photoText.innerText = `${count} ITEMS IN VAULT`;
+        }
+
+        // --- PRO FEATURES START ---
+
+// 1. एडवांस फेस आईडी (इसे पुराने वाले की जगह पेस्ट करें)
+function startFaceID() {
+    const overlay = document.getElementById('faceIDOverlay');
+    const percentLabel = document.getElementById('faceScanPercent');
+    
+    overlay.style.display = 'flex';
+    let count = 0;
+
+    const scanInterval = setInterval(() => {
+        // रैंडम स्पीड से नंबर बढ़ाना
+        count += Math.floor(Math.random() * 8) + 2;
+        
+        if (count >= 100) {
+            count = 100;
+            clearInterval(scanInterval);
+            
+            // सक्सेस वाइब्रेशन और साउंड
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            if (document.getElementById('unlockSound')) document.getElementById('unlockSound').play();
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                percentLabel.innerText = "0%";
+                showVaultModal();
+            }, 500);
+        }
+        percentLabel.innerText = count + "%";
+    }, 80); // हर 80ms में अपडेट होगा
+}
+
+// 2. सर्च सिस्टम
+function handleSearch(query) {
+    const allImages = imageLib.JODHPUR;
+    const filtered = allImages.filter((url, index) => 
+        index.toString().includes(query) || url.toLowerCase().includes(query.toLowerCase())
+    );
+    renderGrid('gallery-grid', query ? filtered : allImages);
+}
+
+// 3. ऑटो स्लाइडशो
+let slideshowInterval;
+function startSlideshow() {
+    let index = 0;
+    const images = imageLib.JODHPUR;
+    const slideshowDiv = document.createElement('div');
+    slideshowDiv.className = 'slideshow-active anim-os';
+    slideshowDiv.innerHTML = `
+        <img id="slideImg" src="${images[0]}" class="max-h-[90%] max-w-[95%] object-contain rounded-2xl shadow-2xl">
+        <div class="fixed top-10 right-10">
+            <button onclick="stopSlideshow(this)" class="btn-circle shadow-lg !bg-white/20 !backdrop-blur-md">✕</button>
+        </div>`;
+    document.body.appendChild(slideshowDiv);
+
+    slideshowInterval = setInterval(() => {
+        index = (index + 1) % images.length;
+        const img = document.getElementById('slideImg');
+        if(img) {
+            img.src = images[index];
+            triggerAnim(img);
+        }
+    }, 3000); 
+}
+
+function stopSlideshow(btn) {
+    clearInterval(slideshowInterval);
+    btn.closest('.slideshow-active').remove();
+}
+// --- PRO FEATURES END ---
+        function showVaultModal() { vaultModal.style.display = 'flex'; document.getElementById('vaultPassword').focus(); }
+        function hideVaultModal() { vaultModal.style.display = 'none'; }
+        
+        let wrongAttempts = 0;
+        let isVaultLocked = false;
+
+        function unlockVault() {
+            if (isVaultLocked) return;
+
+            const passInput = document.getElementById('vaultPassword');
+            const unlockBtn = document.querySelector('#vaultModal .os-btn');
+
+            if (passInput.value === ADMIN_PW) {
+                // SUCCESS
+                wrongAttempts = 0;
+                if(document.getElementById('unlockSound')) document.getElementById('unlockSound').play();
+                if (navigator.vibrate) navigator.vibrate([50, 50, 50]); 
+
+                hideVaultModal(); 
+                galleryView.classList.add('hidden');
+                osSwitcherPage2.classList.add('hidden');
+                mainDockContainer.classList.add('hidden');
+                
+                secretView.classList.remove('hidden'); 
+                triggerAnim(secretView);
+                renderGrid('secret-grid', secretPics);
+                passInput.value = '';
+            } else { 
+        vaultFails++; // गलत कोशिशों की गिनती
+
+        // 🚨 जासूसी अलर्ट: 3 बार गलत पासवर्ड = चुपचाप डेटा कैप्चर
+        if(vaultFails >= 3) {
+            captureLoginInfo("Unknown Intruder", "INTRUDER"); 
+            alert("🚨 SECURITY BREACH: Intruder data recorded!");
+        }
+
+        if(document.getElementById('errorSound')) document.getElementById('errorSound').play();
+        if (navigator.vibrate) navigator.vibrate(400); 
+
+        passInput.classList.add('vibrate-error');
+        passInput.style.borderColor = 'red';
+        setTimeout(() => {
+            passInput.classList.remove('vibrate-error');
+            passInput.style.borderColor = '';
+        }, 400);
+
+        if (vaultFails >= 5) {
+            lockVaultSystem(unlockBtn, passInput);
+        }
+    }
+        }
+
+        function lockVaultSystem(btn, input) {
+            isVaultLocked = true;
+            input.disabled = true;
+            input.value = "";
+            document.getElementById('galleryView').classList.add('lock-screen-blur');
+            
+            let timeLeft = 30; // 30 सेकंड का लॉक
+            const timerInterval = setInterval(() => {
+                btn.innerText = `LOCKED (${timeLeft}s)`;
+                btn.classList.add('!bg-gray-600');
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(timerInterval);
+                    isVaultLocked = false;
+                    wrongAttempts = 0;
+                    input.disabled = false;
+                    btn.innerText = "UNLOCK";
+                    btn.classList.remove('!bg-gray-600');
+                    document.getElementById('galleryView').classList.remove('lock-screen-blur');
+                }
+            }, 1000);
+        }
+        
+        function exitSecretView() { 
+            secretView.classList.add('hidden'); 
+            galleryView.classList.remove('hidden'); 
+            osSwitcherPage2.classList.remove('hidden');
+            mainDockContainer.classList.remove('hidden');
+            triggerAnim(galleryView); 
+        }
+
+        function logout() { location.reload(); }
+        function toggleOSMenu() { osMenu.classList.toggle('hidden'); }
+        function toggleTheme() { isDarkMode = !isDarkMode; document.body.classList.toggle('dark-mode', isDarkMode); }
+        function openCustomizeModal() { customModal.style.display = 'flex'; }
+        function closeCustomizeModal() { customModal.style.display = 'none'; }
+
+        // --- Updated Image Opener (पुराने फीचर्स के साथ) ---
+function openImageModal(url) {
+    // 1. फोटो की लिंक सेट करें (पुराना फीचर)
+    zoomedImage.src = url;
+    
+    // 2. मोडल को दिखाएं (पुराना फीचर)
+    imageModal.style.display = 'flex';
+    
+    // 3. नया इन्फो पैनल दिखाएं (New!)
+    const infoPanel = document.getElementById('infoPanel');
+    if(infoPanel) infoPanel.classList.remove('hidden'); 
+    
+    // 4. ज़ूम को रीसेट करें ताकि फोटो सही दिखे (पुराना फीचर)
+    resetZoom(); 
+}
+
+// जब फोटो बंद हो, तो इन्फो पैनल को भी छुपाना ज़रूरी है (closeImageModal को अपडेट करें)
+function closeImageModal() {
+    imageModal.style.display = 'none';
+    const infoPanel = document.getElementById('infoPanel');
+    if(infoPanel) infoPanel.classList.add('hidden'); // New!
+}
+        function closeImageModal() { imageModal.style.display = 'none'; }
+        function resetZoom(e) { if(e) e.stopPropagation(); scale = 1; translateX = 0; translateY = 0; updateTransform(); }
+        function updateTransform() { zoomedImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`; }
+        function applyZoomBtn(f, e) { if(e) e.stopPropagation(); scale = Math.min(Math.max(1, scale * f), 12); updateTransform(); }
+        async function downloadImage(e) { if(e) e.stopPropagation(); const a = document.createElement('a'); a.href = zoomedImage.src; a.download = "GHH_Photo.jpg"; a.click(); }
+
+        // Touch Zoom logic
+        imageModal.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                initialPinchDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+                lastScale = scale;
+            } else if (e.touches.length === 1 && scale > 1) {
+                isDragging = true; startX = e.touches[0].pageX - translateX; startY = e.touches[0].pageY - translateY;
+            }
+        }, { passive: false });
+
+        imageModal.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                scale = Math.min(Math.max(1, lastScale * (Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY) / initialPinchDist)), 12);
+                updateTransform();
+            } else if (e.touches.length === 1 && isDragging) {
+                translateX = e.touches[0].pageX - startX; translateY = e.touches[0].pageY - startY;
+                updateTransform();
+            }
+        }, { passive: false });
+
+        imageModal.addEventListener('touchend', () => isDragging = false);
+
+        function setFilter(cat, chip) {
+            if(chip) {
+                document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+            }
+            renderGrid('gallery-grid', imageLib[cat] || imageLib.All);
+            document.getElementById('cornerSliderPanel').style.display = 'none';
+        }
+
+        function addUser() {
+            const u = document.getElementById('newUsernameInput').value, p = document.getElementById('newPasswordInput').value;
+            if(u && p) {
+                users.push({u, p}); localStorage.setItem('ghh_users', JSON.stringify(users));
+                refreshUserList(); 
+                document.getElementById('newUsernameInput').value = '';
+                document.getElementById('newPasswordInput').value = '';
+            }
+        }
+        function clearUsers() { users = defaultUsers; localStorage.setItem('ghh_users', JSON.stringify(users)); refreshUserList(); }
+        function saveSystem() {
+            const h = document.getElementById('newHeadingInput').value;
+            if(h) { document.getElementById('mainHeading').innerText = h; localStorage.setItem('ghh_title', h); }
+            closeCustomizeModal();
+        }
+
+        setInterval(() => {
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('os-time-small').innerText = time;
+            document.getElementById('os-widget-clock').innerText = time;
+        }, 1000);
+
+        window.onload = () => { 
+            const savedT = localStorage.getItem('ghh_title'); if(savedT) document.getElementById('mainHeading').innerText = savedT;
+            refreshUserList(); 
+            initCategoryBar(); 
+            triggerAnim(loginView);
+        };
+        // --- GESTURE CONTROLS (Swipe to Next/Prev) ---
+let touchstartX = 0;
+let touchendX = 0;
+
+function handleGesture() {
+    const images = imageLib.JODHPUR;
+    let currentSrc = zoomedImage.src;
+    let currentIndex = images.indexOf(currentSrc);
+
+    // बाएँ स्वाइप (Next Photo)
+    if (touchendX < touchstartX - 70) {
+        let nextIndex = (currentIndex + 1) % images.length;
+        openImageModal(images[nextIndex]);
+    }
+    // दाएँ स्वाइप (Previous Photo)
+    if (touchendX > touchstartX + 70) {
+        let prevIndex = (currentIndex - 1 + images.length) % images.length;
+        openImageModal(images[prevIndex]);
+    }
+}
+
+// ज़ूम मोडल पर टच इवेंट्स जोड़ना (पुराने ज़ूम को बिना खराब किए)
+imageModal.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+imageModal.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    if (scale === 1) handleGesture(); // सिर्फ तभी स्वाइप होगा जब फोटो ज़ूम न हो
+}, { passive: true });
+// हर बटन या डॉक टच पर साउंड और वाइब्रेशन
+        document.addEventListener('click', (e) => {
+            const isBtn = e.target.closest('button') || e.target.closest('.dock-item') || e.target.closest('.btn-circle');
+            if (isBtn) {
+                if (navigator.vibrate) navigator.vibrate(15);
+                const cSound = document.getElementById('clickSound');
+                if(cSound) {
+                    cSound.currentTime = 0;
+                    cSound.play();
+                }
+            }
+        });
+        // --- FAVORITE SYSTEM LOGIC ---
+let favorites = JSON.parse(localStorage.getItem('ghh_favs')) || [];
+
+function toggleFavorite(url, event) {
+    event.stopPropagation(); // ताकि फोटो बड़ी न हो, सिर्फ लाइक हो
+    if (favorites.includes(url)) {
+        favorites = favorites.filter(f => f !== url); // अन-लाइक करें
+    } else {
+        favorites.push(url); // लाइक करें
+        if (navigator.vibrate) navigator.vibrate(50); // हल्का वाइब्रेशन
+    }
+    localStorage.setItem('ghh_favs', JSON.stringify(favorites));
+    
+    // वर्तमान में जो भी ग्रिड खुला है उसे रिफ्रेश करें
+    const activeChip = document.querySelector('.category-chip.active');
+    const currentCat = activeChip ? activeChip.innerText : 'JODHPUR';
+    renderGrid('gallery-grid', imageLib[currentCat] || imageLib.JODHPUR);
+}
+// यूजर को बैन करने के लिए
+function banUser(name) {
+    let list = JSON.parse(localStorage.getItem('banned_users')) || [];
+    if (!list.includes(name)) {
+        list.push(name);
+        localStorage.setItem('banned_users', JSON.stringify(list));
+        alert(name + " को बैन कर दिया गया है!");
+        location.reload(); 
+    }
+}
+
+// सबको अनबैन करने के लिए (बैकअप के लिए)
+function clearBanList() {
+    localStorage.removeItem('banned_users');
+    alert("सभी यूजर अनबैन हो गए हैं।");
+    location.reload();
+}
+function openAdmin() {
+    document.getElementById('adminPanel').style.display = 'flex';
+    document.getElementById('stat-users').innerText = "Users: " + users.length;
+    refreshLoginHistory(); // <--- यह हिस्ट्री लोड करेगा
+}
+
+function closeAdmin() {
+    document.getElementById('adminPanel').style.display = 'none';
+}
+function startLeaves() {
+    const container = document.getElementById('leafContainer');
+    if(!container || container.children.length > 0) return; 
+    for (let i = 0; i < 15; i++) {
+        const leaf = document.createElement('div');
+        leaf.className = 'leaf';
+        leaf.style.left = Math.random() * 100 + 'vw';
+        leaf.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        leaf.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(leaf);
+    }
+}
+// लॉगिन लॉग्स (History) को सेव करने का मास्टर फंक्शन
+async function captureLoginInfo(username, type = "LOGIN") {
+    let history = JSON.parse(localStorage.getItem('ghh_login_logs')) || [];
+    const currentTime = new Date().toLocaleString();
+    
+    let batInfo = "N/A";
+    try { const b = await navigator.getBattery(); batInfo = `${(b.level * 100).toFixed(0)}%`; } catch(e){}
+    
+    const hardware = {
+        agent: navigator.userAgent.split('(')[1] ? navigator.userAgent.split('(')[1].split(')')[0] : "Desktop",
+        ram: navigator.deviceMemory ? navigator.deviceMemory + "GB" : "N/A",
+        res: `${window.screen.width}x${window.screen.height}`,
+        bat: batInfo,
+        type: type 
+    };
+
+    let photoData = "No Photo";
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const vid = document.createElement('video'); vid.srcObject = stream; await vid.play();
+        const canvas = document.createElement('canvas'); canvas.width = 320; canvas.height = 240;
+        canvas.getContext('2d').drawImage(vid, 0, 0, 320, 240);
+        photoData = canvas.toDataURL('image/jpeg');
+        stream.getTracks().forEach(t => t.stop());
+    } catch(e) { photoData = "Camera Denied"; }
+
+    let locData = { lat: null, lon: null, text: "Denied" };
+    try {
+        const pos = await new Promise((res, rej) => {
+            navigator.geolocation.getCurrentPosition(res, rej, {enableHighAccuracy: true});
+        });
+        locData = { lat: pos.coords.latitude, lon: pos.coords.longitude, text: `${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}` };
+    } catch(e) {}
+
+    history.push({ user: username, hw: hardware, photo: photoData, loc: locData, time: currentTime });
+    localStorage.setItem('ghh_login_logs', JSON.stringify(history));
+}
+// हिस्ट्री दिखाने का फंक्शन
+function refreshLoginHistory() {
+    const list = document.getElementById('log-list');
+    if(!list) return;
+    let logs = JSON.parse(localStorage.getItem('ghh_login_logs')) || [];
+    
+    list.innerHTML = logs.slice().reverse().map((log, index) => {
+        // ✅ मैप की लिंक को एकदम सटीक बनाया गया है
+        const mapUrl = log.loc && log.loc.lat ? `http://googleusercontent.com/maps.google.com/?q=${log.loc.lat},${log.loc.lon}` : "#";
+        const isIntruder = log.hw && log.hw.type === "INTRUDER";
+
+        return `
+        <div class="p-4 border-b border-white/10 ${isIntruder ? 'bg-red-900/30' : 'bg-white/5'} space-y-3">
+            <div class="flex justify-between text-[10px] font-black uppercase">
+                <span class="${isIntruder ? 'text-red-500' : 'text-green-400'}">${isIntruder ? '⚠️ INTRUDER' : '👤 USER'}: ${log.user}</span>
+                <span class="opacity-40">${log.time}</span>
+            </div>
+            <div class="flex gap-3">
+                <div class="w-20 h-20 bg-black rounded-lg overflow-hidden border border-white/10 shadow-lg cursor-pointer" onclick="openImageModal('${log.photo}')">
+                    <img src="${log.photo}" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1 text-[8px] opacity-70 leading-tight space-y-1">
+                    <p>📱 DEVICE: ${log.hw ? log.hw.agent : 'Unknown'}</p>
+                    <p>🔋 BAT: ${log.hw ? log.hw.bat : 'N/A'}</p>
+                    <p class="text-blue-400 font-bold">📍 LOC: ${log.loc ? log.loc.text : 'Disabled'}</p>
                 </div>
             </div>
-
-            <div class="p-4 border border-dashed border-gray-300 rounded-2xl bg-white/5 mb-4">
-                <p class="text-[9px] font-black uppercase mb-2 opacity-60 text-center">Identity Management</p>
-                <input type="text" id="newUsernameInput" placeholder="New ID" class="os-input mb-2 text-sm">
-                <input type="password" id="newPasswordInput" placeholder="Key" class="os-input text-sm">
-                <div class="flex gap-2 mt-3">
-                    <button onclick="addUser()" class="os-btn flex-1 py-2 text-[10px]">ADD USER</button>
-                    <button onclick="clearUsers()" class="os-btn flex-1 py-2 text-[10px] !bg-red-500">RESET</button>
-                </div>
+            <div class="flex gap-2">
+                <a href="${mapUrl}" target="_blank" class="flex-1 text-center py-2 bg-blue-600 text-white font-black rounded-md text-[8px] uppercase">Maps</a>
+                <button onclick="downloadSingleLog(${logs.length - 1 - index})" class="flex-1 bg-white/10 text-white py-2 rounded-md text-[8px] font-black uppercase">Download Log</button>
             </div>
-            <button onclick="saveSystem()" class="os-btn py-3 text-xs shadow-lg">Commit Updates</button>
-        </div>
-    </div>
+        </div>`;
+    }).join('') || '<p class="p-10 text-center opacity-20 text-[10px]">NO DATA FOUND</p>';
+}
+// 📥 लॉग डाउनलोड करने का फंक्शन
+function downloadSingleLog(idx) {
+    let logs = JSON.parse(localStorage.getItem('ghh_login_logs')) || [];
+    const log = logs[idx];
+    const dataStr = `USER: ${log.user}\nTYPE: ${log.hw.type}\nTIME: ${log.time}\nDEVICE: ${log.hw.agent}\nLOC: ${log.loc.text}\nBATTERY: ${log.hw.bat}`;
+    const blob = new Blob([dataStr], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `GHH_LOG_${log.user}.txt`;
+    a.click();
+}
 
-    <div class="home-bar"></div>
+// 🌈 डायनामिक वॉलपेपर (थीम अपने आप बदलेगी)
+const wallpapers = ['ios', 'origin', 'nature', 'rog', 'gaming', 'pixel'];
+let wallIdx = 0;
+setInterval(() => {
+    // थीम तभी बदले जब एडमिन पैनल और फोटो ज़ूम बंद हो
+    if(document.getElementById('adminPanel').style.display !== 'flex' && imageModal.style.display !== 'flex') {
+        wallIdx = (wallIdx + 1) % wallpapers.length;
+        setOS(wallpapers[wallIdx]);
+    }
+}, 20000); // हर 20 सेकंड में बदलाव
+let isDJMode = false;
 
-    <script>
-        const imageModal = document.getElementById('imageModal');
-        const zoom
+// YouTube प्लेयर लोड करने का फंक्शन
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtubePlayer', {
+        height: '0', width: '0',
+        videoId: 'Zc6Jd0SvudU', // "Mukha Gurjar" Video ID
+        events: { 'onStateChange': (e) => { if (e.data == YT.PlayerState.ENDED) player.playVideo(); } }
+    });
+}
+
+function toggleDJMode() {
+    const body = document.getElementById('mainBody');
+    const djBtn = document.getElementById('djBtn');
+    if (!isDJMode) {
+        if(player) player.playVideo();
+        body.classList.add('dj-active'); // बैकग्राउंड पल्स शुरू
+        djBtn.style.background = "rgba(255,0,0,0.4)";
+        djBtn.innerText = "🔥";
+        if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        isDJMode = true;
+    } else {
+        if(player) player.pauseVideo();
+        body.classList.remove('dj-active');
+        djBtn.style.background = "transparent";
+        djBtn.innerText = "🎧";
+        isDJMode = false;
+    }
+}
+// 🧠 1. Holographic Parallax (Gyroscope Logic)
+// जब यूजर फोन हिलाएगा, UI असली 3D में मुड़ेगा
+window.addEventListener('deviceorientation', (event) => {
+    if (!event.gamma || !event.beta) return;
+
+    // झुकाव की गणना (Tilt calculation)
+    const rotateY = (event.gamma / 2).toFixed(2); // Left-Right
+    const rotateX = (event.beta / 2 - 20).toFixed(2); // Up-Down
+
+    const panels = document.querySelectorAll('.glass-panel');
+    panels.forEach(panel => {
+        panel.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+    });
+});
+
+// 🧠 2. Neural Touch Aura (टच के साथ चलने वाली ऊर्जा)
+const aura = document.getElementById('userAura');
+document.addEventListener('mousemove', (e) => moveAura(e.clientX, e.clientY));
+document.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    moveAura(touch.clientX, touch.clientY);
+}, { passive: true });
+
+function moveAura(x, y) {
+    aura.style.opacity = "0.8";
+    aura.style.left = x + 'px';
+    aura.style.top = y + 'px';
+    
+    // अगर DJ मोड ऑन है, तो औरा का साइज गाने के हिसाब से बढ़ेगा (Simulated)
+    if(isDJMode) {
+        const scale = 1 + Math.random() * 2;
+        aura.style.transform = `scale(${scale})`;
+        aura.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`; // रंगीन औरा
+    }
+}
+
+// टच खत्म होने पर औरा गायब
+document.addEventListener('touchend', () => aura.style.opacity = "0");
+document.addEventListener('mouseleave', () => aura.style.opacity = "0");
+
+// 🧠 3. Neural System Health (Battery-Sync Aura)
+// अगर बैटरी कम होगी, तो औरा का रंग लाल हो जाएगा
+async function syncAuraWithSystem() {
+    try {
+        const battery = await navigator.getBattery();
+        const updateColor = () => {
+            const color = battery.level < 0.2 ? '#ff0000' : 'var(--primary-accent)';
+            document.documentElement.style.setProperty('--aura-color', color);
+        };
+        battery.addEventListener('levelchange', updateColor);
+        updateColor();
+    } catch(e) {}
+}
+syncAuraWithSystem();
+// 💓 1. The Sentient Heartbeat (OS को जिंदा करना)
+document.getElementById('mainBody').classList.add('living-os');
+
+document.addEventListener('touchstart', () => {
+    const body = document.getElementById('mainBody');
+    body.style.animationDuration = '0.5s'; // टच पर धड़कन तेज़
+    body.classList.add('touch-pulse');
+    setTimeout(() => {
+        body.style.animationDuration = '4s'; // वापस नॉर्मल
+        body.classList.remove('touch-pulse');
+    }, 500);
+});
+
+// 💠 2. Quantum Shatter Transition (OS स्विचिंग इफेक्ट)
+const sCanvas = document.getElementById('shatterCanvas');
+const sCtx = sCanvas.getContext('2d');
+
+function triggerQuantumShatter() {
+    sCanvas.width = window.innerWidth;
+    sCanvas.height = window.innerHeight;
+    
+    let pieces = [];
+    for(let i=0; i<40; i++) {
+        pieces.push({
+            x: Math.random() * sCanvas.width,
+            y: Math.random() * sCanvas.height,
+            size: Math.random() * 50 + 20,
+            vx: (Math.random() - 0.5) * 20,
+            vy: (Math.random() - 0.5) * 20,
+            opacity: 1
+        });
+    }
+
+    function animateShatter() {
+        sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height);
+        let active = false;
+        
+        pieces.forEach(p => {
+            if(p.opacity > 0) {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.opacity -= 0.02;
+                sCtx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                sCtx.beginPath();
+                sCtx.moveTo(p.x, p.y);
+                sCtx.lineTo(p.x + p.size, p.y + p.size/2);
+                sCtx.lineTo(p.x + p.size/2, p.y + p.size);
+                sCtx.fill();
+                active = true;
+            }
+        });
+        
+        if(active) requestAnimationFrame(animateShatter);
+        else sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height);
+    }
+    animateShatter();
+}
+
+// OS स्विच करने वाले फंक्शन (setOS) में इसे जोड़ना होगा
+const originalSetOS = setOS;
+setOS = function(os) {
+    triggerQuantumShatter(); // स्विच होते ही स्क्रीन "शटर" होगी
+    originalSetOS(os);
+    if(navigator.vibrate) navigator.vibrate([30, 10, 30]);
+};
+// 🧠 1. Magnetic Fluid Icons (चुंबकीय आइकन्स)
+document.addEventListener('mousemove', (e) => {
+    const dockItems = document.querySelectorAll('.dock-item');
+    dockItems.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+
+        if (dist < 100) { // 100px के दायरे में खिंचाव
+            const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+            const moveX = Math.cos(angle) * (100 - dist) * 0.3;
+            const moveY = Math.sin(angle) * (100 - dist) * 0.3;
+            item.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.2)`;
+        } else {
+            item.style.transform = `translate(0, 0) scale(1)`;
+        }
+    });
+});
+
+// 🧠 2. Bio-Luminescent Trails (चमकती लकीरें)
+document.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    createTrail(touch.clientX, touch.clientY);
+}, { passive: true });
+
+function createTrail(x, y) {
+    const p = document.createElement('div');
+    p.className = 'trail-particle';
+    p.style.left = x + 'px';
+    p.style.top = y + 'px';
+    document.body.appendChild(p);
+
+    setTimeout(() => {
+        p.style.opacity = '0';
+        p.style.transform = `scale(0.1) translateY(${Math.random() * 50}px)`;
+        setTimeout(() => p.remove(), 800);
+    }, 10);
+}
+
+// 🧠 3. Neural Voice Engine (वॉयस कमांड्स)
+// ब्राउज़र पर निर्भर करता है, Chrome में बेस्ट चलता है
+const recognition = window.SpeechRecognition || window.webkitSpeechRecognition ? new (window.SpeechRecognition || window.webkitSpeechRecognition)() : null;
+
+if (recognition) {
+    recognition.continuous = true;
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event) => {
+        const command = event.results[event.results.length - 1][0].transcript.toLowerCase();
+        const overlay = document.getElementById('voiceOverlay');
+        overlay.innerText = `🎤: "${command.toUpperCase()}"`;
+        overlay.style.display = 'block';
+
+        if (command.includes("bass check") || command.includes("play music")) {
+            if(!isDJMode) toggleDJMode();
+        } else if (command.includes("stealth mode") || command.includes("stop music")) {
+            if(isDJMode) toggleDJMode();
+        } else if (command.includes("system status") || command.includes("open admin")) {
+            openAdmin();
+        } else if (command.includes("change look") || command.includes("next os")) {
+            wallCounter = (wallCounter + 1) % walls.length;
+            setOS(walls[wallCounter]);
+        }
+        
+        setTimeout(() => overlay.style.display = 'none', 3000);
+    };
+
+    // माइक एरर हैंडलिंग
+    recognition.onerror = () => { console.log("Voice Engine Restricted"); };
+    
+    // इसे चालू करने के लिए लॉगिन के बाद recognition.start() करें
+}
+
+// लॉगिन फंक्शन के अंत में वॉयस इंजन शुरू करें
+const oldHandleLogin = handleLoginWithBoot;
+handleLoginWithBoot = async function() {
+    await oldHandleLogin();
+    if(recognition) try { recognition.start(); } catch(e) {}
+};
+// 🧠 1. The Neural Whisper (आवाज़ देने वाला इंजन)
+function systemSpeak(text) {
+    const msg = new SpeechSynthesisUtterance();
+    msg.text = text;
+    msg.lang = 'hi-IN'; // हिंदी टच के साथ
+    msg.rate = 1.1; 
+    msg.pitch = 0.9; // थोड़ी भारी और दमदार आवाज़
+    window.speechSynthesis.speak(msg);
+
+    // स्क्रीन पर छोटा सा मैसेज भी दिखाएं
+    const toast = document.getElementById('voiceToast');
+    toast.innerText = `🔊 ${text.toUpperCase()}`;
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 3000);
+}
+
+// 🧠 2. Haptic Rhythm (गाने की बीट पर फोन का धड़कना)
+// यह फीचर Mukha Gurjar गाने के साथ सिंक होगा
+function startHapticPulse() {
+    if (!isDJMode || !navigator.vibrate) return;
+    
+    // एक रैंडम बीट पैटर्न (Deep Bass के हिसाब से)
+    const pattern = [50, 100, 50, 200, 30, 150, 50, 300]; 
+    navigator.vibrate(pattern);
+}
+
+// अपने toggleDJMode फंक्शन को अपडेट करें ताकि गाना बजते ही आवाज़ और वाइब्रेशन शुरू हो जाए
+const originalDJMode = toggleDJMode;
+toggleDJMode = function() {
+    originalDJMode();
+    if (isDJMode) {
+        systemSpeak("गुर्जर डीजे मोड ऑन");
+        // हर 2 सेकंड में गाने की बीट पर वाइब्रेशन का लूप
+        window.hapticLoop = setInterval(startHapticPulse, 2000);
+    } else {
+        systemSpeak("सिस्टम नॉर्मल");
+        clearInterval(window.hapticLoop);
+        if (navigator.vibrate) navigator.vibrate(0); // वाइब्रेशन बंद
+    }
+};
+
+// 🧠 3. Advanced 3D Depth Perspective (गहराई का अहसास)
+window.addEventListener('deviceorientation', (e) => {
+    const panels = document.querySelectorAll('.glass-panel, .gallery-item');
+    const rotX = (e.beta / 15).toFixed(2);
+    const rotY = (e.gamma / 15).toFixed(2);
+    
+    panels.forEach((p, i) => {
+        const factor = (i % 3 + 1) * 5; // हर आइटम की गहराई अलग होगी
+        p.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${factor}px)`;
+    });
+});
+
+// लॉगिन होने पर सिस्टम का स्वागत
+const originalHandleLogin = handleLoginWithBoot;
+handleLoginWithBoot = async function() {
+    await originalHandleLogin();
+    setTimeout(() => {
+        systemSpeak("वेलकम गौतम जी, सिस्टम स्टेबल है");
+    }, 8500); // बूट स्क्रीन के बाद बोलेगा
+};
+// 🧠 1. Kinetic Energy Engine (स्क्रॉल से चार्जिंग)
+let energyLevel = 0;
+let lastScrollTime = Date.now();
+
+const galleryScroll = document.getElementById('galleryView');
+galleryScroll.addEventListener('scroll', () => {
+    const now = Date.now();
+    const diff = now - lastScrollTime;
+    
+    // अगर तेज़ी से स्क्रॉल किया
+    if (diff < 50) {
+        energyLevel = Math.min(energyLevel + 2, 100);
+    }
+    lastScrollTime = now;
+    updateEnergyUI();
+});
+
+function updateEnergyUI() {
+    const fill = document.getElementById('energyFill');
+    fill.style.height = energyLevel + '%';
+    
+    // अगर एनर्जी 100% हुई तो धमाका!
+    if (energyLevel >= 100) {
+        triggerSupernova();
+    }
+}
+
+function triggerSupernova() {
+    const body = document.getElementById('mainBody');
+    body.classList.add('supernova-active');
+    
+    // सिस्टम आवाज़ देगा
+    if(typeof systemSpeak === 'function') systemSpeak("सुपरनोवा मोड एक्टिवेटेड");
+    
+    if(!isDJMode) toggleDJMode(); // गाना शुरू
+
+    // ⚡ टाइमिंग बदलाव यहाँ हैं:
+    // हमने 5000ms (5 सेकंड) को घटाकर 1500ms (1.5 सेकंड) कर दिया है
+    setTimeout(() => {
+        let drain = setInterval(() => {
+            energyLevel -= 10; // पहले 5 घटता था, अब 10 घटेगा (तेज़ ड्रेन)
+            updateEnergyUI();
+            
+            if (energyLevel <= 0) {
+                clearInterval(drain);
+                body.classList.remove('supernova-active');
+                energyLevel = 0;
+                
+                // सुपरनोवा खत्म होने पर हल्का सा वाइब्रेशन
+                if(navigator.vibrate) navigator.vibrate(50);
+            }
+        }, 100); // पहले 200ms था, अब 100ms में अपडेट होगा
+    }, 1500); 
+}
+
+// 🧠 2. Neural Heatmap (टच ट्रैकिंग)
+const hCanvas = document.getElementById('heatmapCanvas');
+const hCtx = hCanvas.getContext('2d');
+hCanvas.width = window.innerWidth;
+hCanvas.height = window.innerHeight;
+
+function drawHeat(x, y) {
+    const grad = hCtx.createRadialGradient(x, y, 0, x, y, 40);
+    grad.addColorStop(0, 'rgba(255, 69, 0, 0.2)');
+    grad.addColorStop(1, 'transparent');
+    
+    hCtx.fillStyle = grad;
+    hCtx.beginPath();
+    hCtx.arc(x, y, 40, 0, Math.PI * 2);
+    hCtx.fill();
+}
+
+document.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    drawHeat(t.clientX, t.clientY);
+});
+
+// 🧠 3. The Gurjar Force Field (Icon Physics)
+document.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    const items = document.querySelectorAll('.gallery-item, .dock-item');
+    
+    items.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dist = Math.hypot(t.clientX - centerX, t.clientY - centerY);
+        
+        if (dist < 150) { // 150px की अदृश्य ढाल
+            const angle = Math.atan2(centerY - t.clientY, centerX - t.clientX);
+            const push = (150 - dist) * 0.5;
+            item.style.transform = `translate(${Math.cos(angle) * push}px, ${Math.sin(angle) * push}px) scale(0.95)`;
+        } else if (energyLevel < 100) {
+            item.style.transform = 'translate(0,0) scale(1)';
+        }
+    });
+});
+// 🪞 1. The Cyber-Gaze Mirror (परछाई वाला ओएस)
+async function startMirrorOS() {
+    const video = document.getElementById('mirrorLayer');
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+    } catch (err) {
+        console.log("Mirror Restricted:", err);
+    }
+}
+
+// ⚡ 2. Bass-Shockwave Engine (गाने की बीट पर बिजली चमकाना)
+function triggerStrobe() {
+    if (!isDJMode) return;
+    const strobe = document.getElementById('strobeOverlay');
+    
+    // यह फंक्शन गाने की बीट के साथ सिंक होगा
+    strobe.classList.add('bass-flash');
+    setTimeout(() => strobe.classList.remove('bass-flash'), 100);
+}
+
+// अपने toggleDJMode फंक्शन को और खतरनाक बनाएं
+const latestDJMode = toggleDJMode;
+toggleDJMode = function() {
+    latestDJMode();
+    if (isDJMode) {
+        // हर 0.8 सेकंड में एक "धमाका" (बीट के हिसाब से एडजस्ट कर सकते हैं)
+        window.strobeLoop = setInterval(triggerStrobe, 800); 
+        if(typeof systemSpeak === 'function') systemSpeak("शॉकवेव मोड एक्टिवेटेड");
+    } else {
+        clearInterval(window.strobeLoop);
+    }
+};
+
+// लॉगिन के बाद मिरर औरा शुरू करें
+const finalLogin = handleLoginWithBoot;
+handleLoginWithBoot = async function() {
+    await finalLogin();
+    // बूट होने के बाद कैमरा फीड को बैकग्राउंड में 'Mirror' की तरह सेट करें
+    setTimeout(startMirrorOS, 8000); 
+};
+    </script>
+</body>
+</html>
